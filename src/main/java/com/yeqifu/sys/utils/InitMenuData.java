@@ -36,6 +36,7 @@ public class InitMenuData {
         menuMapper.insert(new Menu(15,4,"日志管理",null,0,null,"&#xe655;",1));
         menuMapper.insert(new Menu(16,4,"系统公告",null,0,null,"&#xe645;",1));
         menuMapper.insert(new Menu(17,4,"数据源监控",null,0,null,"&#xe857;",1));
+        menuMapper.insert(new Menu(18,4,"投诉管理",null,0,null,"&#xe857;",1));
 
         //统计分析子节点
         menuMapper.insert(new Menu(18,5,"客户地区统计",null,0,null,"&#xe63c;",1));

@@ -25,7 +25,10 @@ public class NewsServiceImpl implements INewsService {
      */
     @Override
     public DataGridView queryAllNews(NewsVo newsVo) {
+        System.out.println(newsVo.getPage());
+        System.out.println(newsVo.getLimit());
         Page<Object> page = PageHelper.startPage(newsVo.getPage(),newsVo.getLimit());
+        System.out.println(page);
         List<News> data = this.newsMapper.queryAllNews(newsVo);
         return new DataGridView(page.getTotal(),data);
     }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 @RestController
-@RequestMapping("complains")
+@RequestMapping("complain")
 public class ComplainController {
 
     @Autowired
@@ -24,6 +24,7 @@ public class ComplainController {
 
     @RequestMapping("loadAllComplains")
     public DataGridView loadAllComplains(ComplainVo complainVo){
+        System.out.println("controller");
         return this.complainService.queryAllComplains(complainVo);
     }
 
@@ -33,6 +34,7 @@ public class ComplainController {
         try {
             complainVo.setCreatetime(new Date());
             User user = (User) WebUtils.getHttpSession().getAttribute("user");
+            System.out.println(complainVo.getId()+complainVo.getTitle()+complainVo.getContent()+user);
             complainVo.setOpername(user.getRealname());
             this.complainService.addComplains(complainVo);
             return ResultObj.ADD_SUCCESS;

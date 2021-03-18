@@ -73,4 +73,9 @@ public class SysController {
         return "system/news/newsManager";
     }
 
+    @RequestMapping("toComplainManager")
+    public String toComplainManager(){
+        return "system/complain/complainManager";
+    }
+
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>公告管理</title>
+    <title>投诉管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -84,7 +84,7 @@
 <div style="display: none;padding: 20px" id="saveOrUpdateDiv">
     <form class="layui-form" lay-filter="dataFrm" id="dataFrm" style="margin-right: 20px">
         <div class="layui-form-item">
-            <label class="layui-form-label">公告标题:</label>
+            <label class="layui-form-label">投诉标题:</label>
             <div class="layui-input-block">
                 <input type="hidden" name="id">
                 <input type="text" name="title" placeholder="请输入投诉标题" autocomplete="off" class="layui-input">
@@ -101,7 +101,7 @@
             <div class="layui-input-block" style="text-align: center;padding-right: 120px">
                 <button type="button"
                         class="layui-btn layui-btn-normal layui-btn-md layui-icon layui-icon-release layui-btn-radius"
-                        lay-filter="doSubmit" lay-submit="">提交
+                        lay-filter="doSubmit" lay-submit >提交
                 </button>
                 <button type="reset" id="dataFrmResetBtn"
                         class="layui-btn layui-btn-warm layui-btn-md layui-icon layui-icon-refresh layui-btn-radius">重置
@@ -151,7 +151,7 @@
         //渲染数据表格
         tableIns = table.render({
             elem: '#newsTable'   //渲染的目标对象
-            , url: '${yeqifu}/news/loadAllNews.action' //数据接口
+            , url: '${yeqifu}/complain/loadAllComplains.action' //数据接口
             , title: '用户数据表'//数据导出来的标题
             , toolbar: "#newsToolBar"   //表格的工具条
             , height: 'full-190'
@@ -160,7 +160,7 @@
             , cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'id', title: 'ID', align: 'center'}
-                , {field: 'title', title: '公告标题', align: 'center'}
+                , {field: 'title', title: '投诉标题', align: 'center'}
                 , {field: 'createtime', title: '发布时间', align: 'center'}
                 , {field: 'opername', title: '发布人', align: 'center'}
                 , {fixed: 'right', title: '操作', toolbar: '#newsBar', align: 'center'}
@@ -182,7 +182,7 @@
             var params = $("#searchFrm").serialize();
             //alert(params);
             tableIns.reload({
-                url: "${yeqifu}/news/loadAllNews.action?" + params,
+                url: "${yeqifu}/complain/loadAllComplains.action?" + params,
                 page: {curr: 1}
             })
         });
@@ -204,9 +204,9 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             if (layEvent === 'del') { //删除
-                layer.confirm('真的删除【' + data.title + '】这个公告么？', function (index) {
+                layer.confirm('真的删除【' + data.title + '】这个投诉么？', function (index) {
                     //向服务端发送删除指令
-                    $.post("${yeqifu}/news/deleteNews.action", {id: data.id}, function (res) {
+                    $.post("${yeqifu}/complain/deleteComplains.action", {id: data.id}, function (res) {
                         layer.msg(res.msg);
                         //刷新数据表格
                         tableIns.reload();
@@ -227,7 +227,7 @@
         function openAddNews() {
             mainIndex = layer.open({
                 type: 1,
-                title: '添加公告',
+                title: '添加投诉',
                 content: $("#saveOrUpdateDiv"),
                 area: ['700px', '540px'],
                 success: function (index) {
@@ -235,7 +235,7 @@
                     editIndex = layedit.build('content');
                     //清空表单数据
                     $("#dataFrm")[0].reset();
-                    url = "${yeqifu}/news/addNews.action";
+                    url = "${yeqifu}/complain/addComplains.action";
                 }
             });
         }
@@ -248,14 +248,14 @@
         function openUpdateNews(data) {
             mainIndex = layer.open({
                 type: 1,
-                title: '修改公告',
+                title: '修改投诉',
                 content: $("#saveOrUpdateDiv"),
                 area: ['700px', '540px'],
                 success: function (index) {
                     //建立编辑器
                     editIndex = layedit.build('content');
                     form.val("dataFrm", data);
-                    url = "${yeqifu}/news/updateNews.action";
+                    url = "${yeqifu}/complain/updateComplains.action";
                 }
             });
         }
@@ -266,6 +266,7 @@
             layedit.sync(editIndex);
             //序列化表单数据
             var params = $("#dataFrm").serialize();
+            console.log(params);
             $.post(url, params, function (obj) {
                 layer.msg(obj.msg);
                 //关闭弹出层
@@ -279,7 +280,7 @@
         function viewNews(data) {
             mainIndex = layer.open({
                 type: 1,
-                title: '查看公告',
+                title: '查看投诉',
                 content: $("#viewNewsDiv"),
                 area: ['700px', '540px'],
                 success: function (index) {
@@ -304,9 +305,9 @@
                     params += "&ids=" + item.id;
                 }
             });
-            layer.confirm('真的要删除这些公告么？', function (index) {
+            layer.confirm('真的要删除这些投诉么？', function (index) {
                 //向服务端发送删除指令
-                $.post("${yeqifu}/news/deleteBatchNews.action", params, function (res) {
+                $.post("${yeqifu}/complain/deleteBatchComplains.action", params, function (res) {
                     layer.msg(res.msg);
                     //刷新数据表格
                     tableIns.reload();

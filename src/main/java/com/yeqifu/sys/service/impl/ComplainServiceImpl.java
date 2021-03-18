@@ -21,8 +21,14 @@ public class ComplainServiceImpl implements IComplainService {
 
     @Override
     public DataGridView queryAllComplains(ComplainVo complainVo) {
+        System.out.println(complainVo.getPage());
+        System.out.println(complainVo.getLimit());
         Page<Object> page = PageHelper.startPage(complainVo.getPage(),complainVo.getLimit());
+        System.out.println(page);
+
         List<Complain> data = this.complainMapper.queryAllComplains(complainVo);
+        System.out.println("service3");
+
         return new DataGridView(page.getTotal(),data);
     }
 
