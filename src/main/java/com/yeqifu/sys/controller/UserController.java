@@ -35,6 +35,7 @@ public class UserController {
      */
     @RequestMapping("addUser")
     public ResultObj addUser(UserVo userVo){
+        System.out.println(userVo.getPwd());
         try{
             this.userService.addUser(userVo);
             return ResultObj.ADD_SUCCESS;
@@ -51,6 +52,7 @@ public class UserController {
      */
     @RequestMapping("updateUser")
     public ResultObj updateUser(UserVo userVo){
+        System.out.println(userVo.getPwd());
         try {
             this.userService.updateUser(userVo);
             return ResultObj.UPDATE_SUCCESS;

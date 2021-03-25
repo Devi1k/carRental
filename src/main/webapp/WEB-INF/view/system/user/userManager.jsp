@@ -135,6 +135,12 @@
                 </div>
             </div>
             <div class="layui-inline">
+                <label class="layui-form-label">用户密码:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="pwd" lay-verify="required|password" placeholder="请输入用户密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
                 <label class="layui-form-label">用户职位:</label>
                 <div class="layui-input-inline">
                     <input type="text" name="position" placeholder="请输入用户职位" autocomplete="off" class="layui-input">
@@ -205,6 +211,7 @@
                 , {field: 'identity', title: '身份证号', align: 'center',width:'200'}
                 , {field: 'phone', title: '手机号码', align: 'center',width:'140'}
                 , {field: 'address', title: '用户地址', align: 'center',width:'130'}
+                , {field: 'pwd',title: '密码',align: 'center',width: '0'}
                 , {field: 'sex', title: '性别', align: 'center', width:'90',templet: function (d) {
                         return d.sex == '1' ? '<font color=blue>男</font>' : '<font color=red>女</font>';
                     }}
@@ -295,12 +302,14 @@
 
         //打开修改页面
         function openUpdateUser(data) {
+
             mainIndex = layer.open({
                 type: 1,
                 title: '修改用户',
                 content: $("#saveOrUpdateDiv"),
                 area: ['700px', '380px'],
                 success: function (index) {
+
                     form.val("dataFrm", data);
                     url = "${yeqifu}/user/updateUser.action";
                 }
@@ -311,6 +320,7 @@
         form.on("submit(doSubmit)", function (obj) {
             //序列化表单数据
             var params = $("#dataFrm").serialize();
+            console.log(params)
             $.post(url, params, function (obj) {
                 layer.msg(obj.msg);
                 //关闭弹出层

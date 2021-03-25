@@ -62,7 +62,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void addUser(UserVo userVo) {
         //设置默认密码
-        userVo.setPwd(DigestUtils.md5DigestAsHex(SysConstast.USER_DEFAULT_PWD.getBytes()));
+        userVo.setPwd(DigestUtils.md5DigestAsHex(userVo.getPwd().getBytes()));
         //设置用户类型 都是普通用户 type=2
         userVo.setType(SysConstast.USER_TYPE_NORMAL);
         this.userMapper.insertSelective(userVo);
@@ -74,6 +74,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public void updateUser(UserVo userVo) {
+        userVo.setPwd(DigestUtils.md5DigestAsHex(userVo.getPwd().getBytes()));
         this.userMapper.updateByPrimaryKeySelective(userVo);
     }
 
