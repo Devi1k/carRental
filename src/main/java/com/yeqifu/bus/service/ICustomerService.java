@@ -52,4 +52,6 @@ public interface ICustomerService {
      * @return
      */
     List<Customer> queryAllCustomerForList(CustomerVo customerVo);
+    
+    Customer login(Customer c);
 }

@@ -16,6 +16,9 @@
     <%--<link rel="icon" href="favicon.ico">--%>
     <link rel="stylesheet" href="${yeqifu}/static/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="${yeqifu}/static/css/public.css" media="all"/>
+    <style>
+    	.magt3{opacity: 0.1;border: 2px solid red;}
+    </style>
 </head>
 <body class="childrenBody">
 
@@ -96,7 +99,7 @@
             <div class="layui-row layui-col-space10">
                 <div class="layui-col-md9 layui-col-xs7">
 
-                    <div class="layui-form-item magt3">
+                    <div class="layui-form-item">
                         <label class="layui-form-label">车牌号:</label>
                         <div class="layui-input-block" style="padding: 5px">
                             <input type="text" name="carnumber" id="carnumber" autocomplete="off" class="layui-input"
@@ -318,6 +321,7 @@
                     $("#showCarImg").attr("src", "${yeqifu}/file/downloadShowFile.action?path=" + data.carimg);
                     url = "${yeqifu}/car/updateCar.action";
                     $("#carnumber").attr("readonly","readonly");
+                    $('#carimgDiv').css({"background":"#fff","opacity": "1"});
                 }
             });
         }
@@ -368,7 +372,7 @@
             done: function (res, index, upload) {
                 $('#showCarImg').attr('src', "${yeqifu}/file/downloadShowFile.action?path=" + res.data.src);
                 $('#carimg').val(res.data.src);
-                $('#carimgDiv').css("background", "#fff");
+                $('#carimgDiv').css({"background":"#fff","opacity": "1"});
             }
         });
         

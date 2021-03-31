@@ -91,5 +91,4 @@ public class LoginController {
         ServletOutputStream outputStream = response.getOutputStream();
         ImageIO.write(lineCaptcha.getImage(), "JPEG", outputStream);
     }
-
 }

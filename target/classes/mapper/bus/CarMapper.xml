@@ -162,6 +162,9 @@
     where carnumber = #{carnumber,jdbcType=VARCHAR}
   </update>
 
+<select id="getType" resultMap="BaseResultMap">
+	select distinct cartype from bus_car
+</select>
   <!-- 查询 -->
   <select id="queryAllCar" resultMap="BaseResultMap">
     select
@@ -182,6 +185,9 @@
       </if>
       <if test="isrenting!=null">
         and isrenting=#{isrenting}
+      </if>
+      <if test="sprice != null and sprice != '' and eprice != null and eprice != ''">
+        and rentprice between #{sprice} and #{eprice}
       </if>
     </where>
   </select>

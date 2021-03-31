@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="${yeqifu}/static/css/public.css" media="all"/>
     <link rel="stylesheet" href="${yeqifu}/static/layui_ext/dtree/dtree.css">
     <link rel="stylesheet" href="${yeqifu}/static/layui_ext/dtree/font/dtreefont.css">
+    <style>
+    	.magt3{opacity: 0.1;border: 2px solid red; width: 200px;}
+    </style>
 </head>
 <body class="childrenBody">
 
@@ -92,6 +95,19 @@
                 <input type="text" name="title" placeholder="请输入公告标题" autocomplete="off" class="layui-input">
             </div>
         </div>
+         <div class="layui-form-item">
+            <label class="layui-form-label">上传图片:</label>
+             <div class="layui-upload-list thumbBox mag0 magt3" id="carimgDiv">
+                 <%--显示要上传的图片--%>
+                 <img class="layui-upload-img thumbImg" id="showCarImg">
+                 <%--保存当前显示图片的地址--%>
+                 <input type="hidden" name="pic" id="pic">
+             </div>
+             <!-- <div class="layui-upload">
+		  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+		  <button type="button" class="layui-btn" id="test9">开始上传</button>
+		</div> -->
+         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">公告内容:</label>
             <div class="layui-input-block">
@@ -129,13 +145,14 @@
 <script src="${yeqifu}/static/layui/layui.js"></script>
 <script type="text/javascript">
     var tableIns;
-    layui.use(['jquery', 'layer', 'form', 'table', 'laydate', 'layedit'], function () {
+    layui.use(['jquery', 'layer', 'form', 'table', 'laydate', 'layedit', 'upload'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         var form = layui.form;
         var table = layui.table;
         var laydate = layui.laydate;
         var layedit = layui.layedit;
+        var upload = layui.upload;
 
         //渲染时间
         laydate.render({
@@ -179,6 +196,20 @@
             }
         });
 
+        //上传缩略图
+        upload.render({
+            elem: '#carimgDiv',
+            url: '${yeqifu}/file/uploadFile.action',
+            method: "post",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
+            acceptMime: 'images/*',
+            field: "mf",
+            done: function (res, index, upload) {
+                $('#showCarImg').attr('src', "${yeqifu}/file/downloadShowFile.action?path=" + res.data.src);
+                $('#pic').val(res.data.src);
+                $('#carimgDiv').css({"background":"#fff","opacity": "1"});
+            }
+        });
+        
         //模糊查询
         $("#doSearch").click(function () {
             var params = $("#searchFrm").serialize();
@@ -235,6 +266,9 @@
                 success: function (index) {
                     //建立编译器
                     editIndex = layedit.build('content');
+                    layedit.setContent(editIndex, "");
+                    $('#showCarImg').attr('src',"")
+                    $('#carimgDiv').css({"background":"#fff","opacity": "0.1"});
                     //清空表单数据
                     $("#dataFrm")[0].reset();
                     url = "${yeqifu}/news/addNews.action";
@@ -248,15 +282,19 @@
 
         //打开修改页面
         function openUpdateNews(data) {
+        	console.log(data)
+        	//建立编辑器
+            editIndex = layedit.build('content');
+        	layedit.setContent(editIndex, data.content);
             mainIndex = layer.open({
                 type: 1,
                 title: '修改公告',
                 content: $("#saveOrUpdateDiv"),
                 area: ['700px', '540px'],
                 success: function (index) {
-                    //建立编辑器
-                    editIndex = layedit.build('content');
+                	$('#showCarImg').attr('src', "${yeqifu}/file/downloadShowFile.action?path=" + data.pic);
                     form.val("dataFrm", data);
+                    $('#carimgDiv').css({"background":"#fff","opacity": "1"});
                     url = "${yeqifu}/news/updateNews.action";
                 }
             });

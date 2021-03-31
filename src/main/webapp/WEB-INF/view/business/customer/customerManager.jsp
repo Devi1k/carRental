@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="${yeqifu}/static/css/public.css" media="all"/>
     <link rel="stylesheet" href="${yeqifu}/static/layui_ext/dtree/dtree.css">
     <link rel="stylesheet" href="${yeqifu}/static/layui_ext/dtree/font/dtreefont.css">
+    <style>
+    .layui-inline{display: block;;}
+    </style>
 </head>
 <body class="childrenBody">
 
@@ -105,6 +108,20 @@
     <form class="layui-form" lay-filter="dataFrm" id="dataFrm">
         <div class="layui-form-item">
             <div class="layui-inline">
+                <label class="layui-form-label">账号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="account" placeholder="请输入客户账号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">密码:</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
                 <label class="layui-form-label">客户姓名:</label>
                 <div class="layui-input-inline">
                     <input type="text" name="custname" lay-verify="required" placeholder="请输入客户姓名" autocomplete="off"
@@ -119,7 +136,8 @@
                 </div>
             </div>
         </div>
-        <div class="layui-form-item">
+        
+         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">客户地址:</label>
                 <div class="layui-input-inline">
@@ -133,6 +151,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">客户电话:</label>
@@ -183,6 +202,7 @@
             , page: true  //是否启用分页
             , cols: [[   //列表数据
                 {type: 'checkbox', fixed: 'left'}
+                , {field: 'account', title: '账号', align: 'center', width: '200'}
                 , {field: 'identity', title: '身份证号', align: 'center', width: '200'}
                 , {field: 'custname', title: '客户姓名', align: 'center', width: '125'}
                 , {field: 'address', title: '客户地址', align: 'center', width: '125'}

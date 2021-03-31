@@ -1,8 +1,10 @@
 package com.yeqifu.sys.controller;
 
+import com.yeqifu.sys.constast.SysConstast;
 import com.yeqifu.sys.domain.News;
 import com.yeqifu.sys.domain.User;
 import com.yeqifu.sys.service.INewsService;
+import com.yeqifu.sys.utils.AppFileUtils;
 import com.yeqifu.sys.utils.DataGridView;
 import com.yeqifu.sys.utils.ResultObj;
 import com.yeqifu.sys.utils.WebUtils;
@@ -41,6 +43,11 @@ public class NewsController {
     @RequestMapping("addNews")
     public ResultObj addNews(NewsVo newsVo){
         try {
+        	//如果不是默认图片就去掉图片的_temp的后缀
+            if(!newsVo.getPic().equals(SysConstast.DEFAULT_CAR_IMG)){
+                String filePath =AppFileUtils.updateFileName(newsVo.getPic(), SysConstast.FILE_UPLOAD_TEMP);
+                newsVo.setPic(filePath);
+            }
             newsVo.setCreatetime(new Date());
             User user=(User) WebUtils.getHttpSession().getAttribute("user");
             newsVo.setOpername(user.getRealname());
@@ -92,6 +99,11 @@ public class NewsController {
     @RequestMapping("updateNews")
     public ResultObj updateNews(NewsVo newsVo){
         try {
+        	//如果不是默认图片就去掉图片的_temp的后缀
+            if(!newsVo.getPic().equals(SysConstast.DEFAULT_CAR_IMG)){
+                String filePath =AppFileUtils.updateFileName(newsVo.getPic(), SysConstast.FILE_UPLOAD_TEMP);
+                newsVo.setPic(filePath);
+            }
             this.newsService.updateNews(newsVo);
             return ResultObj.UPDATE_SUCCESS;
         }catch (Exception e){

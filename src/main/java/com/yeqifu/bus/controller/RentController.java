@@ -69,6 +69,7 @@ public class RentController {
     @RequestMapping("saveRent")
     public ResultObj saveRent(RentVo rentVo){
         try {
+        	rentVo.setRentid(System.currentTimeMillis()+"");
             //设置创建时间
             rentVo.setCreatetime(new Date());
             //设置归还状态

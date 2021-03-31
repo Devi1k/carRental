@@ -16,9 +16,9 @@ public class RentVo extends Rent {
     /**
      * 扩展表单参数  将前台时间提交到后台
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     public Date getStartTime() {

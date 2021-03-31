@@ -19,4 +19,6 @@ public interface CarMapper {
     int updateByPrimaryKey(Car record);
 
     List<Car> queryAllCar(CarVo carVo);
+    
+    List<Car> getType();
 }

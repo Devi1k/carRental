@@ -251,7 +251,7 @@
                 type: 1,
                 title: "【" + data.carnumber + '】的出租图片',
                 content: $("#viewCarImageDiv"),
-                area: ['1100px', '600px'],
+                area: ['1000px', '500px'],
                 success: function (index) {
                     $("#view_carimg").attr("src", "${yeqifu}/file/downloadShowFile.action?path=" + data.carimg);
                 }

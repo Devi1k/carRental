@@ -9,7 +9,7 @@
         <result column="opername" jdbcType="VARCHAR" property="opername" />
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, content, createtime, opername
+        id, title, content, createtime, opername, reply, replyer, identity
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -45,6 +45,15 @@
             <if test="opername != null">
                 opername,
             </if>
+            <if test="reply != null">
+                reply,
+            </if>
+            <if test="replyer != null">
+                replyer,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -61,6 +70,15 @@
             </if>
             <if test="opername != null">
                 #{opername,jdbcType=VARCHAR},
+            </if>
+             <if test="reply != null">
+                #{reply},
+            </if>
+            <if test="replyer != null">
+                #{replyer},
+            </if>
+            <if test="identity != null">
+                #{identity},
             </if>
         </trim>
     </insert>
@@ -79,6 +97,15 @@
             <if test="opername != null">
                 opername = #{opername,jdbcType=VARCHAR},
             </if>
+             <if test="reply != null">
+                reply = #{reply},
+            </if>
+            <if test="replyer != null">
+                replyer = #{replyer},
+            </if>
+            <if test="identity != null">
+                identity = #{identity},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -88,6 +115,9 @@
             content = #{content,jdbcType=VARCHAR},
             createtime = #{createtime,jdbcType=TIMESTAMP},
             opername = #{opername,jdbcType=VARCHAR}
+            reply = #{reply,jdbcType=VARCHAR}
+            replyer = #{replyer,jdbcType=VARCHAR}
+            identity = #{identity,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -108,6 +138,9 @@
             </if>
             <if test="endTime!=null">
                 and endtime <![CDATA[<=]]>#{endTime}
+            </if>
+             <if test="identity !=null">
+                and identity = #{identity}
             </if>
         </where>
         order by createtime asc

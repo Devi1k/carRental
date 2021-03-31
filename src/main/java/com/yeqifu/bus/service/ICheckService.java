@@ -45,4 +45,6 @@ public interface ICheckService {
      * @param checkVo
      */
     void updateCheck(CheckVo checkVo);
+    
+    public void rentCar(CheckVo checkVo);
 }

@@ -15,6 +15,9 @@ public class Complain {
     private Date createtime;
 
     private String opername;
+    private String reply;
+    private String replyer;
+    private String identity;
 
     public Integer getId() {
         return id;
@@ -24,7 +27,31 @@ public class Complain {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
+	public String getReplyer() {
+		return replyer;
+	}
+
+	public void setReplyer(String replyer) {
+		this.replyer = replyer;
+	}
+
+	public String getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+
+	public String getTitle() {
         return title;
     }
 

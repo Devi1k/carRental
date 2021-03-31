@@ -28,6 +28,9 @@ public class Car {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss",timezone = "GTM+8")
     private Date createtime;
+    
+    private String sprice;
+    private String eprice;
 
     public String getCarnumber() {
         return carnumber;
@@ -108,4 +111,20 @@ public class Car {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+	public String getSprice() {
+		return sprice;
+	}
+
+	public void setSprice(String sprice) {
+		this.sprice = sprice;
+	}
+
+	public String getEprice() {
+		return eprice;
+	}
+
+	public void setEprice(String eprice) {
+		this.eprice = eprice;
+	}
 }

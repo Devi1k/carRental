@@ -19,6 +19,8 @@ public class Customer {
     private String phone;
 
     private String career;
+    private String account;
+    private String password;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createtime;
@@ -78,4 +80,21 @@ public class Customer {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+    
 }

@@ -64,6 +64,17 @@ public class CheckController {
             return ResultObj.ADD_ERROR;
         }
     }
+    
+    /**
+     * 还车
+     * @param checkVo
+     * @return
+     */
+    @RequestMapping("updateRentCar")
+    public ResultObj rentCar(CheckVo checkVo) {
+    	this.checkService.rentCar(checkVo);
+    	return ResultObj.ADD_SUCCESS;
+    }
 
     /**
      * 查询所有检查单

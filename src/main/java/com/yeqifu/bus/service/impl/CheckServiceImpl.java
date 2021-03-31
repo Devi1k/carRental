@@ -82,6 +82,21 @@ public class CheckServiceImpl implements ICheckService {
         car.setIsrenting(SysConstast.RENT_CAR_FALSE);
         this.carMapper.updateByPrimaryKeySelective(car);
     }
+    
+    
+    @Override
+    public void rentCar(CheckVo checkVo) {
+        //更改出租单的状态
+        Rent rent = this.rentMapper.selectByPrimaryKey(checkVo.getRentid());
+        //更改为已归还
+        rent.setRentflag(SysConstast.RENT_BACK_TRUE);
+        this.rentMapper.updateByPrimaryKeySelective(rent);
+        //更改汽车的状态
+        Car car = this.carMapper.selectByPrimaryKey(rent.getCarnumber());
+        //更改汽车状态为未出租
+        car.setIsrenting(SysConstast.RENT_CAR_FALSE);
+        this.carMapper.updateByPrimaryKeySelective(car);
+    }
 
     /**
      * 查询所有检查单

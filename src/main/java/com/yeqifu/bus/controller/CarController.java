@@ -1,5 +1,13 @@
 package com.yeqifu.bus.controller;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.yeqifu.bus.domain.Car;
 import com.yeqifu.bus.service.ICarService;
 import com.yeqifu.bus.vo.CarVo;
@@ -7,11 +15,6 @@ import com.yeqifu.sys.constast.SysConstast;
 import com.yeqifu.sys.utils.AppFileUtils;
 import com.yeqifu.sys.utils.DataGridView;
 import com.yeqifu.sys.utils.ResultObj;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
 
 /**
  * 车辆管理控制器
@@ -31,6 +34,17 @@ public class CarController {
     @RequestMapping("loadAllCar")
     public DataGridView loadAllCar(CarVo carVo){
         return this.carService.queryAllCar(carVo);
+    }
+    
+    /**
+     * 获取汽车类型
+     * @param carVo
+     * @return
+     */
+    @RequestMapping("getCartype")
+    @ResponseBody
+    public List<Car> getCartype(){
+        return this.carService.getType();
     }
 
     /**

@@ -34,25 +34,18 @@
         <div class="layui-inline">
             <label class="layui-form-label">投诉内容:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" name="content" autocomplete="off" class="layui-input layui-input-inline"
+                <input type="text" name="content" autocomplete="off"
                        placeholder="请输入投诉内容" style="height: 30px;border-radius: 10px">
             </div>
         </div>
-<%--        <div class="layui-inline">--%>
-<%--            <label class="layui-form-label">开始时间:</label>--%>
-<%--            <div class="layui-input-inline" style="padding: 5px">--%>
-<%--                <input type="text" name="startTime" id="startTime" readonly="readonly"--%>
-<%--                       class="layui-input layui-input-inline"--%>
-<%--                       placeholder="yyyy-MM-dd" style="height: 30px;border-radius: 10px">--%>
-<%--            </div>--%>
-<%--        </div>--%>
-        <div class="layui-inline">
+ 
+        <!-- <div class="layui-inline">
             <label class="layui-form-label">操作人:</label>
             <div class="layui-input-inline" style="padding: 5px">
                 <input type="text" name="opername" id="opername" class="layui-input layui-input-inline"
                        style="height: 30px;border-radius: 10px">
             </div>
-        </div>
+        </div> -->
 
         <div class="layui-inline" style="margin-left: 50px">
             <button type="button"
@@ -69,13 +62,13 @@
 <!-- 数据表格开始 -->
 <table class="layui-hide" id="newsTable" lay-filter="newsTable"></table>
 <div style="display: none;" id="newsToolBar">
-    <button type="button" class="layui-btn layui-btn-sm layui-btn-radius" lay-event="add">增加</button>
+    <!-- <button type="button" class="layui-btn layui-btn-sm layui-btn-radius" lay-event="add">增加</button> -->
     <button type="button" class="layui-btn layui-btn-danger layui-btn-sm layui-btn-radius" lay-event="deleteBatch">
         批量删除
     </button>
 </div>
 <div id="newsBar" style="display: none;">
-    <a class="layui-btn layui-btn-xs layui-btn-radius" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-radius" lay-event="edit">编辑回复</a>
     <a class="layui-btn layui-btn-warm layui-btn-xs layui-btn-radius" lay-event="viewNews">查看</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-radius" lay-event="del">删除</a>
 </div>
@@ -93,7 +86,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">投诉内容:</label>
             <div class="layui-input-block">
-                <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="content"></textarea>
+                <textarea class="layui-textarea " name="content" lay-verify="content" id="content"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">回复:</label>
+            <div class="layui-input-block">
+                <textarea class="layui-textarea " name="reply" lay-verify="content" id="reply"></textarea>
             </div>
         </div>
 
@@ -103,9 +102,9 @@
                         class="layui-btn layui-btn-normal layui-btn-md layui-icon layui-icon-release layui-btn-radius"
                         lay-filter="doSubmit" lay-submit >提交
                 </button>
-                <button type="reset" id="dataFrmResetBtn"
+                <!-- <button type="reset" id="dataFrmResetBtn"
                         class="layui-btn layui-btn-warm layui-btn-md layui-icon layui-icon-refresh layui-btn-radius">重置
-                </button>
+                </button> -->
             </div>
         </div>
     </form>
@@ -232,7 +231,7 @@
                 area: ['700px', '540px'],
                 success: function (index) {
                     //建立编译器
-                    editIndex = layedit.build('content');
+                  //editIndex = layedit.build('content');
                     //清空表单数据
                     $("#dataFrm")[0].reset();
                     url = "${yeqifu}/complain/addComplains.action";
@@ -241,7 +240,7 @@
         }
 
         $("#dataFrmResetBtn").click(function () {
-            layedit.setContent(editIndex, "");
+            //layedit.setContent(editIndex, "");
         });
 
         //打开修改页面
@@ -253,7 +252,7 @@
                 area: ['700px', '540px'],
                 success: function (index) {
                     //建立编辑器
-                    editIndex = layedit.build('content');
+                   //editIndex = layedit.build('content');
                     form.val("dataFrm", data);
                     url = "${yeqifu}/complain/updateComplains.action";
                 }

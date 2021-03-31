@@ -1,0 +1,28 @@
+<ul class="layui-nav layNav" lay-filter="">
+    <li class="layui-nav-item home"><a href="index.html">首页</a></li>
+    <li class="layui-nav-item myRent isLogin"><a href="myRent.html">我的预约</a></li>
+    <li class="layui-nav-item userInfo isLogin"><a href="userInfo.html">个人信息</a></li>
+    <li class="layui-nav-item news "><a href="news.html">租车公告</a></li>
+    <li class="layui-nav-item jy isLogin"><a href="complaints.html">投诉建议</a></li>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item noLogin"><a href="login.html">登录 / 注册</a></li>
+        <li class="layui-nav-item isLogin"><a href="userInfo.html" class="username"></a></li>
+        <li class="layui-nav-item isLogin"><a href="login.html">退出</a></li>
+      </ul>
+</ul>
+<style>
+	.layui-nav{background-color: #052277;}
+</style>
+<script>
+$(function(){
+	var account = localStorage.getItem("account") || '';
+	if(account != ""){
+		$(".isLogin").show()
+		$(".noLogin").hide()
+		$(".username").html(account)
+	}else{
+		$(".isLogin").hide()
+		$(".noLogin").show()
+	}
+})
+</script>

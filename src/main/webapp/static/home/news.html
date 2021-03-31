@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文章列表</title>
+<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+</head>
+<style>
+.teamList .layui-col-md3,.teamList .layui-col-md9{margin-top: 25px;cursor: pointer;}
+.teamList .layui-col-md3 img{width: 220px;height: 125px;}
+.teamList .layui-col-md3 p{text-align: center;font-size: 16px;font-weight: 700; line-height: 30px;color: #2196F3;}
+.teamList .layui-col-md3:hover{transform:scale(1.05);}
+.line1{border-bottom: 1px solid #ddd;clear: both;padding:10px 20px;}
+.teamList .layui-col-md9{height: 120px; overflow: hidden;}
+.teamList .layui-col-md9 a h2{color: #2196F3;}
+.teamList .layui-col-md9 p {line-height: 30px;}
+.layui-nav-tree{width:auto;}
+video{width: 100%;cursor: pointer;}
+.videoList{padding:15px;text-align: center;font-size:15px;}
+</style>
+<body>
+<div class="headerBox"></div>
+<div class="main">
+	<div class="layui-container">  
+	<div class="layui-row teamList">
+		<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 " style="margin: 20px auto">
+			<div class="aList">
+			
+			</div>
+		</div>
+		<div id="pagebox" style="float: right;"></div>
+	</div><br><br>
+</div>
+</div>
+</body>
+<script>
+	layui.use(['element','jquery','laypage'], function(){
+	  var eleent = layui.element;
+	  var laypage = layui.laypage;
+	  var $ = layui.jquery;
+	  
+	  $(".headerBox").load("common/header.html");
+	  setInterval(function(){
+		$(".news").addClass("layui-this");
+	  },200);
+	  var uid = localStorage.getItem("uid") || '';
+	  	$.getJSON("../category/getByPage.do",{page:1,limit:100},function(data){
+	  		$(".cList").empty()
+	  		$.each(data.rows,function(i,d){
+		  		var html = '<dd><a href="javascript:;" data-id="'+d.id+'">'+d.name+'</a></dd>'
+		  		$(".cList").append(html);
+	  		})
+	  		$(".cList a").click(function(d){
+	  			var cid = $(this).attr("data-id");
+	  			getArticle(cid,"",1);
+	  		})
+	  	})
+	  	$(".searchbtn").click(function(){
+	  		var name = $("#searchname").val();
+	  		console.log(name)
+	  		getArticle("",name,1);
+	  	})
+	  	getArticle(1,"",1);
+	  	function getArticle(cid,name,page){
+	  		$.getJSON("../../news/loadAllNews.action",{page:page,limit:5 },function(data){
+	  			laypage.render({
+	  			    elem: 'pagebox' 
+	  			    ,count: data.count 
+	  			  ,limit: 5
+	  			  ,curr: location.hash.replace('#!fenye=', '') //获取起始页
+	  			  ,hash: 'fenye' //自定义hash值
+	  			  ,jump: function(obj, first){
+	  			    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+		  			    //首次不执行
+		  			    if(!first){
+		  			    	getArticle(cid,"",obj.curr);
+		  			      return false;
+		  			    }
+		  			  }
+	  			  });
+		  		$(".aList").empty()
+		  		$.each(data.data,function(i,d){
+			  		var html = '<div class="line1">'+
+						'<div class="layui-col-xs3 layui-col-sm3 layui-col-md3">'+
+					'<img src="../../file/downloadShowFile.action?path='+d.pic+'">'+
+				'</div><div class="layui-col-xs9 layui-col-sm9 layui-col-md9">'+
+					'<span style=" float: right;"></span><a href="newsDetail.html?id='+d.id+'">'+
+						'<h2>'+d.title+'</h2>'+
+						'<p>'+d.content+'</p></a></div></div>'
+			  		$(".aList").append(html);
+		  		})
+		  		
+	  		})
+	  	}
+	});
+</script>
+</html>

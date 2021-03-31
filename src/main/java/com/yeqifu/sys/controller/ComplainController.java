@@ -35,7 +35,9 @@ public class ComplainController {
             complainVo.setCreatetime(new Date());
             User user = (User) WebUtils.getHttpSession().getAttribute("user");
             System.out.println(complainVo.getId()+complainVo.getTitle()+complainVo.getContent()+user);
-            complainVo.setOpername(user.getRealname());
+            /*if(user != null) {
+            	complainVo.setReplyer(user.getRealname());
+            }*/
             this.complainService.addComplains(complainVo);
             return ResultObj.ADD_SUCCESS;
         }catch (Exception e){
@@ -69,6 +71,10 @@ public class ComplainController {
     @RequestMapping("updateComplains")
     public ResultObj updateComplains(ComplainVo complainVo){
         try {
+        	User user = (User) WebUtils.getHttpSession().getAttribute("user");
+        	if(user != null) {
+            	complainVo.setReplyer(user.getRealname());
+            }
             this.complainService.updateComplains(complainVo);
             return ResultObj.UPDATE_SUCCESS;
         }catch (Exception e){

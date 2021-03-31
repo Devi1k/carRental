@@ -62,9 +62,7 @@
       <if test="opername != null">
         opername,
       </if>
-      <if test="createtime != null">
-        createtime,
-      </if>
+      createtime
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rentid != null">
@@ -91,9 +89,7 @@
       <if test="opername != null">
         #{opername,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
+      now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.yeqifu.bus.domain.Rent">
@@ -120,9 +116,7 @@
       <if test="opername != null">
         opername = #{opername,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
+ 
     </set>
     where rentid = #{rentid,jdbcType=VARCHAR}
   </update>

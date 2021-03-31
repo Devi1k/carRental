@@ -13,12 +13,12 @@ public class Rent {
 
     private Double price;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //前台获取的时间进行格式化插入到数据库中
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM+8") //后台数据库查询出来的时间转换到前台进行显示
+    @DateTimeFormat(pattern = "yyyy-MM-dd") //前台获取的时间进行格式化插入到数据库中
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8") //后台数据库查询出来的时间转换到前台进行显示
     private Date begindate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss",timezone = "GTM+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
     private Date returndate;
 
     private Integer rentflag;

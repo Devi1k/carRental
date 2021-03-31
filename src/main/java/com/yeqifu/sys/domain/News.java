@@ -18,6 +18,7 @@ public class News {
     private Date createtime;
 
     private String opername;
+    private String pic;
 
     public Integer getId() {
         return id;
@@ -27,7 +28,15 @@ public class News {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getTitle() {
         return title;
     }
 

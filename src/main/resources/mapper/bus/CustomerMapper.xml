@@ -11,7 +11,7 @@
         <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        identity, custname, sex, address, phone, career, createtime
+        identity, custname, sex, address, phone, career, createtime,account,password
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -56,6 +56,12 @@
             <if test="createtime != null">
                 createtime,
             </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="identity != null">
@@ -78,6 +84,12 @@
             </if>
             <if test="createtime != null">
                 #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="account != null">
+                 #{account},
+            </if>
+            <if test="password != null">
+                #{password},
             </if>
         </trim>
     </insert>
@@ -102,6 +114,12 @@
             <if test="createtime != null">
                 createtime = #{createtime,jdbcType=TIMESTAMP},
             </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
         </set>
         where identity = #{identity,jdbcType=VARCHAR}
     </update>
@@ -116,6 +134,13 @@
         where identity = #{identity,jdbcType=VARCHAR}
     </update>
 
+	<!--客户登陆-->
+    <select id="login" resultMap="BaseResultMap">
+        select * from bus_customer
+        where account=#{account} and password=#{password}
+    </select>
+    
+    
     <select id="queryAllCustomer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

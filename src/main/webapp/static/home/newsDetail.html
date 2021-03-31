@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>详情</title>
+<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="../frame/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+</head>
+<style>
+.main{width:1000px;margin: 20px auto;}
+.content{line-height: 30px;font-size: 15px;}
+</style>
+<body>
+<div class="headerBox"></div>
+<div class="main">
+	<div class="layui-container" style=" width: 100%;"> <br>
+		<div class="layui-row teamList">
+			<h3 class="title" style="text-align: center;font-size:20px;"></h3>
+				<p class="createtime" style="margin-left:40%;color:#666;line-height: 30px;"></p>
+			<div class="content">
+			</div>
+		</div><br><br>
+	
+</div>
+</div>
+</body>
+<script>
+	layui.use(['element','jquery','layer','form'], function(){
+	  var eleent = layui.element;
+	  var $ = layui.jquery;
+	  var layer = layui.layer;
+	  var form = layui.form;
+	  $(".headerBox").load("common/header.html");
+	  setInterval(function(){
+		$(".news").addClass("layui-this");
+	  },200);
+	  var uid = localStorage.getItem("uid") || "";
+	  var custname = localStorage.getItem("custname") || "";
+	  var id = getQueryVariable("id")
+	  getDetail()
+	  //获取详情
+	  function getDetail(){
+		  var num = localStorage.getItem("num");
+		  $.getJSON("../../news/loadNewsById.action",{id:id},function(data){
+		  		console.log(data)
+		  		//data = data.data[0]
+		  		$(".title").html(data.title);
+		  		$(".content").html(data.content);
+		  		$(".createtime").html(data.createtime);
+ 
+		  	})
+	  }
+	  function getQueryVariable(variable){
+	       var query = window.location.search.substring(1);
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == variable){return pair[1];}
+	       }
+	       return "";
+	}
+	})
+</script>
+</html>

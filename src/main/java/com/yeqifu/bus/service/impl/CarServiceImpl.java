@@ -83,4 +83,9 @@ public class CarServiceImpl implements ICarService {
     public Car queryCarByCarNumber(String carnumber) {
         return this.carMapper.selectByPrimaryKey(carnumber);
     }
+
+	@Override
+	public List<Car> getType() {
+		return this.carMapper.getType();
+	}
 }

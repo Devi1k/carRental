@@ -1,11 +1,13 @@
 package com.yeqifu.bus.controller;
 
+import com.yeqifu.bus.domain.Customer;
 import com.yeqifu.bus.service.ICustomerService;
 import com.yeqifu.sys.utils.DataGridView;
 import com.yeqifu.sys.utils.ResultObj;
 import com.yeqifu.bus.vo.CustomerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -29,6 +31,19 @@ public class CustomerController {
     public DataGridView loadAllCustomer(CustomerVo customerVo){
         return this.customerService.queryAllCustomer(customerVo);
     }
+    
+    @RequestMapping("login")
+    @ResponseBody
+    public Customer loadAllCustomer(Customer c){
+    	Customer customer = this.customerService.login(c);
+    	if(customer != null) {
+    		return customer;
+    	}else {
+    		return null;
+    	}
+         
+    }
+    
 
     /**
      * 添加一个客户

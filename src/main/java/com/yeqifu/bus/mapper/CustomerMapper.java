@@ -18,4 +18,6 @@ public interface CustomerMapper {
     int updateByPrimaryKey(Customer record);
 
     List<Customer> queryAllCustomer(Customer customer);
+    
+    Customer login(Customer c);
 }

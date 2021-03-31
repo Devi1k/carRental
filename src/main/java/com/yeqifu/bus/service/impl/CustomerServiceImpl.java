@@ -96,4 +96,9 @@ public class CustomerServiceImpl implements ICustomerService {
     public List<Customer> queryAllCustomerForList(CustomerVo customerVo) {
         return this.customerMapper.queryAllCustomer(customerVo);
     }
+
+	@Override
+	public Customer login(Customer c) {
+		return this.customerMapper.login(c);
+	}
 }

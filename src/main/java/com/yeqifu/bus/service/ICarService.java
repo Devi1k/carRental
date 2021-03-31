@@ -1,5 +1,7 @@
 package com.yeqifu.bus.service;
 
+import java.util.List;
+
 import com.yeqifu.bus.domain.Car;
 import com.yeqifu.bus.vo.CarVo;
 import com.yeqifu.sys.utils.DataGridView;
@@ -43,4 +45,6 @@ public interface ICarService {
      * @return
      */
     Car queryCarByCarNumber(String carnumber);
+    
+    List<Car> getType();
 }
