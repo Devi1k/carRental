@@ -99,6 +99,7 @@
 		  var num = localStorage.getItem("num");
 		  $.getJSON("../../car/loadAllCar.action",{carnumber: num,page:1,limit:1},function(data){
 		  		console.log(data)
+			  console.log(($("#begindate").val()-$("#returndate").val()>0))
 		  		data = data.data[0]
 		  		$(".carnumber").html(data.carnumber);
 		  		$(".cartype").html(data.cartype);
@@ -113,6 +114,10 @@
 				$(".video").hide()
 				$(".pic").attr("src","../../file/downloadShowFile.action?path="+data.carimg);
 		  	})
+	  }
+	  function CompareDate(d1, d2) {
+		  return ((new Date(d1.replace(/-/g, "\/"))) > (new Date(d2.replace(/-/g, "\/"))));
+
 	  }
 	  $("#openModel").click(function(){
 		  if(custname == ""){
@@ -130,6 +135,11 @@
 			   alert("开始和结束时间不能为空！")
 			   return false;
 		   }
+		   if (CompareDate($("#begindate").val(),$("#returndate").val())){
+		   	alert("开始时间不能晚于结束时间")
+			   return false
+		   }
+
 		  var p = {
 			price: $("#price").val(),
 			rentflag: 1,
@@ -141,6 +151,7 @@
 			carnumber: $(".carnumber").html(), 
 		  }
 		  $.post("../../rent/saveRent.action",p,function(data){
+			  console.log(CompareDate($("#begindate").val(),$("#returndate").val()))
 			  console.log(data)
 			  alert("预订成功！");
 			  getDetail();
