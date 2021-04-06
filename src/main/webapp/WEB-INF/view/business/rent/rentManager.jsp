@@ -147,6 +147,13 @@
                 </div>
             </div>
             <div class="layui-inline">
+                <label class="layui-form-label">归还状态:</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="rentflag" lay-verify="required"  class="layui-input" value="1"/>已归还
+                    <input type="radio" name="rentflag" lay-verify="required"  class="layui-input" value="0"/>未归还
+                </div>
+            </div>
+            <div class="layui-inline">
                 <label class="layui-form-label">操作员:</label>
                 <div class="layui-input-inline">
                     <input type="text" name="opername" id="opername" lay-verify="required" placeholder="请输入操作员" readonly="readonly" class="layui-input">
