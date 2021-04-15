@@ -69,6 +69,13 @@
         color: red !important;
         margin-top: -26px;
     }
+    .grid-demo{
+        text-align: center;
+        color:#71767a;
+    }
+    .label{
+        text-align: center;
+    }
 </style>
 <body>
 <div class="headerBox"></div>
@@ -91,8 +98,25 @@
                     <div><img src="../images/轮播2.png"></div>
                     <div><img src="../images/轮播3.png"></div>
                     <div><img src="../images/轮播4.png"></div>
+                </div>
+            </div>
 
-
+            <div class="layui-row">
+                <div class="layui-col-xs3">
+                    <div class="label"><img src="../images/label1.png"></div>
+                    <div class="grid-demo grid-demo-bg1">100+车型</div>
+                </div>
+                <div class="layui-col-xs3">
+                    <div class="label"><img src="../images/label2.png"></div>
+                    <div class="grid-demo">千家网点</div>
+                </div>
+                <div class="layui-col-xs3">
+                    <div class="label"><img src="../images/label3.png"></div>
+                    <div class="grid-demo grid-demo-bg1">100%保障</div>
+                </div>
+                <div class="layui-col-xs3">
+                    <div class="label"><img src="../images/label4.png"></div>
+                    <div class="grid-demo">无限里程</div>
                 </div>
             </div>
             <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 " style="text-align: center;margin-top:15px;">
@@ -120,7 +144,6 @@
         var $ = layui.jquery;
         var carousel = layui.carousel;
         carousel.render({
-
             elem: '#test10'
             , width: '100%'
             ,float:'left'

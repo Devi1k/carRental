@@ -950,7 +950,8 @@ a cite {
 }
 
 .layui-col-xs3 {
-    width: 25%
+    width: 25%;
+    height:90px
 }
 
 .layui-col-xs4 {
