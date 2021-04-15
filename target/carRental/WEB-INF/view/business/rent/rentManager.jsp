@@ -149,8 +149,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">归还状态:</label>
                 <div class="layui-input-inline">
-                    <input type="radio" name="rentflag" lay-verify="required"  class="layui-input" value="1"/>已归还
-                    <input type="radio" name="rentflag" lay-verify="required"  class="layui-input" value="0"/>未归还
+                    <input type="radio" name="rentflag" lay-verify="required" value="1" title="已归还">
+                    <input type="radio" name="rentflag" lay-verify="required" value="0" title="未归还">
                 </div>
             </div>
             <div class="layui-inline">

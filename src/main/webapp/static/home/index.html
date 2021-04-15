@@ -1,130 +1,209 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>首页</title>
-<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../layui/layui.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>首页</title>
+    <link href="../layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
 </head>
 <style>
-.teamList .layui-col-md3 {margin-top: 25px;cursor: pointer;    height: 165px;}
-.teamList .layui-col-md3 img{width: 220px;height: 135px;}
-.teamList .layui-col-md3 p{text-align: center;font-size: 16px;font-weight: 700; line-height: 30px;color: #2196F3;}
-.teamList .layui-col-md3:hover{transform:scale(1.05);}
-.line1{border-bottom: 1px solid #ddd;clear: both;padding:10px 20px;}
-.teamList .layui-col-md9{height: 120px; overflow: hidden;}
-.teamList .layui-col-md9 a h2{color: #2196F3;}
-.teamList .layui-col-md9 p {line-height: 30px;}
-.layui-nav-tree{width:auto;}
-video{width: 100%;cursor: pointer;}
-.videoList{padding:15px;text-align: center;font-size:15px;}
-.price{color:red !important;    margin-top: -26px;}
+    .teamList .layui-col-md3 {
+        margin-top: 25px;
+        cursor: pointer;
+        height: 165px;
+    }
+
+    .teamList .layui-col-md3 img {
+        width: 220px;
+        height: 135px;
+    }
+
+    .teamList .layui-col-md3 p {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 30px;
+        color: #2196F3;
+    }
+
+    .teamList .layui-col-md3:hover {
+        transform: scale(1.05);
+    }
+
+    .line1 {
+        border-bottom: 1px solid #ddd;
+        clear: both;
+        padding: 10px 20px;
+    }
+
+    .teamList .layui-col-md9 {
+        height: 120px;
+        overflow: hidden;
+    }
+
+    .teamList .layui-col-md9 a h2 {
+        color: #2196F3;
+    }
+
+    .teamList .layui-col-md9 p {
+        line-height: 30px;
+    }
+
+    .layui-nav-tree {
+        width: auto;
+    }
+
+    video {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .videoList {
+        padding: 15px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .price {
+        color: red !important;
+        margin-top: -26px;
+    }
 </style>
 <body>
 <div class="headerBox"></div>
 <div class="main">
-	<div class="layui-container">  
-	<div class="layui-row teamList">
-		<!-- <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
-			<ul class="layui-nav layui-nav-tree" style="padding-top:20px;">
-			  <li class="layui-nav-item layui-nav-itemed">
-			    <dl class="layui-nav-child cList">
-			    </dl>
-			  </li>
-			 </ul>
-			
-		</div> -->
-		<div class="layui-col-xs12 layui-col-sm12 layui-col-md12 " style="text-align: center;margin-top:15px;">
-				<select id="type" style="width:100px;height: 32px;">
-				</select>
-				<input  type="number" id="sprice" placeholder="最低价格" style="width:100px;height: 30px;"/>
-				<input  type="number" id="eprice" placeholder="最高价格"  style="width:100px;height: 30px;"/>
-   				<button class="layui-btn layui-btn-normal searchbtn">搜索</button>
-			<div class="aList">
-			
-			</div>
-		</div>
-		<div id="pagebox" style="float: right;"></div>
-	</div><br><br>
-</div>
+    <div class="layui-container">
+        <div class="layui-row teamList">
+            <!-- <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <ul class="layui-nav layui-nav-tree" style="padding-top:20px;">
+                  <li class="layui-nav-item layui-nav-itemed">
+                    <dl class="layui-nav-child cList">
+                    </dl>
+                  </li>
+                 </ul>
+
+            </div> -->
+
+            <div class="layui-carousel" id="test10">
+                <div carousel-item="">
+                    <div><img src="../images/轮播1.png"></div>
+                    <div><img src="../images/轮播2.png"></div>
+                    <div><img src="../images/轮播3.png"></div>
+                    <div><img src="../images/轮播4.png"></div>
+
+
+                </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 " style="text-align: center;margin-top:15px;">
+                <select id="type" style="width:100px;height: 32px;">
+                </select>
+                <input type="number" id="sprice" placeholder="最低价格" style="width:100px;height: 30px;"/>
+                <input type="number" id="eprice" placeholder="最高价格" style="width:100px;height: 30px;"/>
+                <button class="layui-btn layui-btn-normal searchbtn">搜索</button>
+                <div class="aList">
+
+                </div>
+            </div>
+            <div id="pagebox" style="float: right;"></div>
+        </div>
+        <br><br>
+    </div>
 </div>
 </body>
 <script>
-	layui.use(['element','jquery','laypage','form'], function(){
-	  var eleent = layui.element;
-	  var laypage = layui.laypage;
-	  var form = layui.form;
-	  var $ = layui.jquery;
-	  
-	  $(".headerBox").load("common/header.html");
-	  setInterval(function(){
-		$(".home").addClass("layui-this");
-	  },200);
-	  var uid = localStorage.getItem("uid") || '';
+    layui.use(['element', 'jquery', 'laypage', 'form', 'carousel'], function () {
 
-	  	$(".searchbtn").click(function(){
-	  		var eprice = $("#eprice").val();
-	  		var sprice = $("#sprice").val();
-	  		var type = $("#type").val();
-	  		console.log(name)
-	  		getCar(1,type,sprice,eprice)
-	  	})
-	  	getCar(1,null,null,null);
-	  	//获取汽车类型
-	  	getType()
-	  	function getType(){
-	  		$("#type").empty()
-	  		$.getJSON("../../car/getCartype.action",function(res){
-	  			$("#type").append("<option value=''>请选择</option>");
-	  			$.each(res,function(i,d){
-					var thl = "<option value='"+d.cartype+"'>"+d.cartype+"</option>";
-					$("#type").append(thl);
-	  			})
-	  		})
-	  		
-	  	}
-	  	function getCar(page,type,sprice,eprice){
-	  		$.getJSON("../../car/loadAllCar.action",{page:page,limit:8,cartype: type,sprice: sprice,eprice: eprice},function(data){
-	  			laypage.render({
-	  			    elem: 'pagebox' 
-	  			    ,count: data.count 
-	  			  ,limit: 8
-	  			  ,curr: location.hash.replace('#!fenye=', '') //获取起始页
-	  			  ,hash: 'fenye' //自定义hash值
-	  			  ,jump: function(obj, first){
-	  			    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-		  			    //首次不执行
-		  			    if(!first){
-		  			    	getCar(obj.curr,null,null,null);
-		  			      return false;
-		  			    }
-		  			  }
-	  			  });
-	  			
-		  		$(".aList").empty()
-	  	 		
-	  	 		var type = [];
-	  			$.each(data.data,function(i,d){
-			  		var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3" data-id="'+d.carnumber+'">'+
-					'<img src="../../file/downloadShowFile.action?path='+d.carimg+'">'+
-					'<p >'+
-						'<span>'+d.cartype+'</span>'+
-						'<span class="price" style="margin-left:20px;">￥'+d.rentprice+'</span></p></div>'
-			  		$(".aList").append(html);
-		  		})
-		  		$(".layui-col-md3").click(function(){
-		  			var d = $(this).attr("data-id");
-		  			localStorage.setItem("num",d);
-		  			location.href = "detail.html"
-		  		})
+        var eleent = layui.element;
+        var laypage = layui.laypage;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var carousel = layui.carousel;
+        carousel.render({
 
-	  		})
-	  	}
-	  	
-	  	function unique(arr){
-	  	    return arr.reduce((prev,cur) => prev.includes(cur) ? prev : [...prev,cur],[]);
-	  	}
-	});
+            elem: '#test10'
+            , width: '100%'
+            ,float:'left'
+            , height: '440px'
+            , interval: 5000
+        });
+
+        $(".headerBox").load("common/header.html");
+        setInterval(function () {
+            $(".home").addClass("layui-this");
+        }, 200);
+        var uid = localStorage.getItem("uid") || '';
+
+        $(".searchbtn").click(function () {
+            var eprice = $("#eprice").val();
+            var sprice = $("#sprice").val();
+            var type = $("#type").val();
+            console.log(name)
+            getCar(1, type, sprice, eprice)
+        })
+        getCar(1, null, null, null);
+        //获取汽车类型
+        getType()
+
+        function getType() {
+            $("#type").empty()
+            $.getJSON("../../car/getCartype.action", function (res) {
+                $("#type").append("<option value=''>请选择</option>");
+                $.each(res, function (i, d) {
+                    var thl = "<option value='" + d.cartype + "'>" + d.cartype + "</option>";
+                    $("#type").append(thl);
+                })
+            })
+
+        }
+
+        function getCar(page, type, sprice, eprice) {
+            $.getJSON("../../car/loadAllCar.action", {
+                page: page,
+                limit: 8,
+                cartype: type,
+                sprice: sprice,
+                eprice: eprice
+            }, function (data) {
+                laypage.render({
+                    elem: 'pagebox'
+                    , count: data.count
+                    , limit: 8
+                    , curr: location.hash.replace('#!fenye=', '') //获取起始页
+                    , hash: 'fenye' //自定义hash值
+                    , jump: function (obj, first) {
+                        console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                        //首次不执行
+                        if (!first) {
+                            getCar(obj.curr, null, null, null);
+                            return false;
+                        }
+                    }
+                });
+
+                $(".aList").empty()
+
+                var type = [];
+                $.each(data.data, function (i, d) {
+                    var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3" data-id="' + d.carnumber + '">' +
+                        '<img src="../../file/downloadShowFile.action?path=' + d.carimg + '">' +
+                        '<p >' +
+                        '<span>' + d.cartype + '</span>' +
+                        '<span class="price" style="margin-left:20px;">￥' + d.rentprice + '</span></p></div>'
+                    $(".aList").append(html);
+                })
+                $(".layui-col-md3").click(function () {
+                    var d = $(this).attr("data-id");
+                    localStorage.setItem("num", d);
+                    location.href = "detail.html"
+                })
+
+            })
+        }
+
+        function unique(arr) {
+            return arr.reduce((prev, cur) => prev.includes(cur) ? prev : [...prev, cur], []);
+        }
+    });
 </script>
 </html>
