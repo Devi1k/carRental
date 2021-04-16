@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="layui-row">
+            <div class="layui-row layui-col-space1">
                 <div class="layui-col-xs3">
                     <div class="label"><img src="../images/label1.png"></div>
                     <div class="grid-demo grid-demo-bg1">100+车型</div>
@@ -208,12 +208,14 @@
 
                 var type = [];
                 $.each(data.data, function (i, d) {
-                    var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3" data-id="' + d.carnumber + '">' +
-                        '<img src="../../file/downloadShowFile.action?path=' + d.carimg + '">' +
-                        '<p >' +
-                        '<span>' + d.cartype + '</span>' +
-                        '<span class="price" style="margin-left:20px;">￥' + d.rentprice + '</span></p></div>'
-                    $(".aList").append(html);
+                    if(d.isrenting===0){
+                        var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3" data-id="' + d.carnumber + '">' +
+                            '<img src="../../file/downloadShowFile.action?path=' + d.carimg + '">' +
+                            '<p >' +
+                            '<span>' + d.cartype + '</span>' +
+                            '<span class="price" style="margin-left:20px;">￥' + d.rentprice + '</span></p></div>'
+                        $(".aList").append(html);
+                    }
                 })
                 $(".layui-col-md3").click(function () {
                     var d = $(this).attr("data-id");
