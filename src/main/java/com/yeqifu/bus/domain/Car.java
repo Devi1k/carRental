@@ -8,6 +8,7 @@ import java.util.Date;
  * 车辆实体类
  */
 public class Car {
+    private Integer id;
     private String carnumber;
 
     private String cartype;
@@ -31,6 +32,14 @@ public class Car {
     
     private String sprice;
     private String eprice;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getCarnumber() {
         return carnumber;

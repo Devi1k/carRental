@@ -1,0 +1,28 @@
+.main{width: 1100px;margin: 0 auto;}
+.layui-table{width: 1100px;margin: 20px auto;}
+.layui-table tr th{text-align: center;}
+.layui-table td{color:#333;}
+.layui-row .layui-col-sm3 ,.layui-row .layui-col-sm6{margin-top:20px;text-align: center;height: 40px;line-height: 40px;}
+.layui-row .d1{background-color: rgb(1, 92, 37);border-top-left-radius: 15px;border-bottom-left-radius: 15px;color:#fff;font-size: 18px;}
+.layui-row .d2{background-color:rgb(153, 21, 35);border-top-right-radius: 15px;border-bottom-right-radius: 15px;color:#fff;font-size: 18px;}
+.d3{background: #ddd;font-size: 22px; font-weight: 700;}
+.layui-tab-content{height:auto !important;}
+.areaBox img{height:470px;}
+.areaBox{font-size: 15px;font-weight: 700;}
+.area1{margin-top: -400px;margin-left: -590px;}
+.area2{margin-top: -20px;margin-left: -380px;}
+.area3{margin-top: -10px;}
+.area4{margin-top: -20px;margin-left: 380px;}
+.area5{margin-top: -20px;margin-left: 600px;}
+.area6{margin-top: 150px;margin-left: -150px;}
+.area7{margin-top: -20px;margin-left: 150px;}
+.area8{margin-top: 40px;margin-left: -480px;}
+.area9{margin-top: 60px;}
+.area10{margin-top: -100px;margin-left: 480px;}
+.layui-tab-card>.layui-tab-title .layui-this{background: #2196F3;color: #fff;}
+.tjTb a{color:#2196F3;}
+.teamList .layui-col-md2{text-align: center;
+	border:1px solid #ddd;margin: 20px 10px;  border-radius: 10px;width: 160px; height: 100px;}
+.teamList .layui-col-md2 P{font-size: 16px;line-height: 45px;color: #fff;}
+.teamList .layui-col-md2 .p2{font-size: 25px;font-weight: 700;}
+.teamList .b1,.teamList .b2,.teamList .b3,.teamList .b4,.teamList .b5{background: #2196F3;}

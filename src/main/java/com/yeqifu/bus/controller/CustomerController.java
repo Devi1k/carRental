@@ -2,9 +2,10 @@ package com.yeqifu.bus.controller;
 
 import com.yeqifu.bus.domain.Customer;
 import com.yeqifu.bus.service.ICustomerService;
+import com.yeqifu.bus.vo.CustomerVo;
 import com.yeqifu.sys.utils.DataGridView;
 import com.yeqifu.sys.utils.ResultObj;
-import com.yeqifu.bus.vo.CustomerVo;
+import com.yeqifu.sys.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +38,7 @@ public class CustomerController {
     public Customer loadAllCustomer(Customer c){
     	Customer customer = this.customerService.login(c);
     	if(customer != null) {
+            WebUtils.getHttpSession().setAttribute("userGuestv2", customer);
     		return customer;
     	}else {
     		return null;

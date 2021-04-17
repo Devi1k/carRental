@@ -69,11 +69,13 @@
         color: red !important;
         margin-top: -26px;
     }
-    .grid-demo{
+
+    .grid-demo {
         text-align: center;
-        color:#71767a;
+        color: #71767a;
     }
-    .label{
+
+    .label {
         text-align: center;
     }
 </style>
@@ -146,7 +148,7 @@
         carousel.render({
             elem: '#test10'
             , width: '100%'
-            ,float:'left'
+            , float: 'left'
             , height: '440px'
             , interval: 5000
         });
@@ -208,8 +210,8 @@
 
                 var type = [];
                 $.each(data.data, function (i, d) {
-                    if(d.isrenting===0){
-                        var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3" data-id="' + d.carnumber + '">' +
+                    if (d.isrenting === 0) {
+                        var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3"  real-id="' + d.id + '"   data-id="' + d.carnumber + '">' +
                             '<img src="../../file/downloadShowFile.action?path=' + d.carimg + '">' +
                             '<p >' +
                             '<span>' + d.cartype + '</span>' +
@@ -218,9 +220,33 @@
                     }
                 })
                 $(".layui-col-md3").click(function () {
+
                     var d = $(this).attr("data-id");
-                    localStorage.setItem("num", d);
-                    location.href = "detail.html"
+                    var realid = $(this).attr("real-id");
+                    // alert(d)
+                    //do logger
+                    if (d) {
+
+                        $.post("../../flowTable/save.action", {currentCar: realid}, function (data) {
+                            localStorage.setItem("num", d);
+                         location.href = "detail.html?id="+realid
+                               // console.log(JSON.stringify(data))
+
+                        })
+//                        $.ajax({
+//                            url: "/flowTable/save.action" ,
+//                            data: {currentCar:d},
+//                            type: "GET",
+//                            dataType: "json",
+//                            success: function (data) {
+//                                localStorage.setItem("num", d);
+//                                //  location.href = "detail.html"
+//                                console.log(JSON.stringify(data))
+//                            }
+//                        });
+                    }
+
+
                 })
 
             })

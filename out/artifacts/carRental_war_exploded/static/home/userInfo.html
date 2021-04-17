@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>用户信息</title>
+<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="../frame/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+</head>
+<style>
+.layui-form{width:500px;margin:20px auto;}
+.layui-elem-field{width:750px;margin:20px auto;}
+</style>
+<body>
+<div class="headerBox"></div>
+<div class="main">
+	<div class="layui-container">  
+		<fieldset class="layui-elem-field">
+			<legend>个人信息</legend>
+			<div class="layui-field-box">
+				<form class="layui-form" action="" lay-filter="formData">
+					<div class="layui-form-item">
+					<label class="layui-form-label">账号</label>
+					<div class="layui-input-block">
+						<input type="hidden" id="id" name="id">
+						<input type="text" id="account" name="account" disabled class="layui-input" style="background: #ddd;">
+					</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">密码</label>
+						<div class="layui-input-block">
+							<input type="password" id="password" name="password" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">姓名</label>
+						<div class="layui-input-block">
+							<input type="text" id="custname" name="custname" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">身份证</label>
+						<div class="layui-input-block">
+							<input type="text" id="identity" name="identity" readonly  class="layui-input" style="background: #ddd;">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">电话</label>
+						<div class="layui-input-block">
+							<input type="text" id="phone" name="phone" maxlength="11" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">地址</label>
+						<div class="layui-input-block">
+							<input type="text" name="address" id="address" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">职位</label>
+						<div class="layui-input-block">
+							<input type="text" name="career" id="career" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">性别</label>
+						<div class="layui-input-block">
+							<input type="radio" name="sex" value="1" class="sex1" title="男" checked>
+							<input type="radio" name="sex" value="0" class="sex2" title="女">
+						</div>
+					</div>
+					<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+					</div>
+					</div>
+				</form>
+			</div>
+		</fieldset>
+	</div>
+</div>
+</body>
+<script>
+	layui.use('form', function(){
+		var form = layui.form;
+		var $ = layui.jquery;
+		//监听提交
+		form.on('submit(formDemo)', function(data){
+			
+			if($("#custname").val().length == 0){
+				alert('姓名不能为空');
+				return false;
+			}
+			if($("#password").val().length < 6){
+				alert('密码必须6位字符');
+				return false;
+			}
+			if($("#phone").val().length != 11){
+				alert('请输入正确的手机号');
+				return false;
+			}
+	 
+			 $.post("../../customer/updateCustomer.action",data.field,function(data){
+				 alert("修改成功！")
+			 })
+			return false;
+		});
+		var uid = localStorage.getItem("uid") || '';
+		if(uid != ""){
+			$.getJSON("../../customer/loadAllCustomer.action",{identity: uid,page:1,limit:2},function(data){
+		  		console.log(data)
+		  		form.val("formData",data.data[0]);
+		  		if(data.sex == "1"){
+		  			$(".sex1").attr("checked","checked");
+		  		}else{
+		  			$(".sex2").attr("checked","checked");
+		  		}
+		  	})
+		}else{
+			location.href = "login.html"
+		}
+		 
+		$(".headerBox").load("common/header.html");
+		setInterval(function(){
+			$(".userInfo").addClass("layui-this");
+		  },200);
+	});
+</script>
+</html>

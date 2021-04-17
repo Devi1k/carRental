@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>我的预约</title>
+    <link href="../layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <link href="../frame/common.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/gameInfoDetail.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div class="headerBox"></div>
+
+<div class="layui-container">
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <div id="addData" class="layer_self_wrap" style="display:none;">
+        <form id="dataForm" class="layui-form layui-form-pane" method="post" lay-filter="formFil"
+              style="padding: 15px;">
+            <input id="rentid" type="hidden" name="rentid"/>
+            <div class="layui-form-item">
+                <label class="layui-form-label">出租价格</label>
+                <div class="layui-input-block">
+                    <input type="text" name="price" id="price" readonly disabled class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">车牌照号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="carnumber" id="carnumber" readonly disabled class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开始时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="begindate" id="begindate" readonly disabled class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="returndate" id="returndate" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn save" lay-submit lay-filter="formDemo">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    layui.use(['element', "jquery", "table", "form", "laydate"], function () {
+        var element = layui.element;
+        var table = layui.table;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var laydate = layui.laydate;
+        var modelIndex = "";
+
+        laydate.render({
+            elem: '#returndate' //指定元素
+            , trigger: 'click'
+        });
+
+        var flag = 1;
+        var uid = localStorage.getItem("uid");
+        var custname = localStorage.getItem("custname");
+        if (uid == "") {
+            location.href = "login.html";
+        }
+        $("#uid").val(uid);
+        var tableList = table.render({
+            elem: '#test'
+            , url: "../../rent/loadAllRent.action"
+            , where: {
+                identity: uid
+            },
+            page: false
+            , parseData: function (res) { //res 即为原始返回的数据
+                console.log(res, 888)
+                return {
+                    "code": 0, //解析接口状态
+                    "msg": res.count, //解析提示文本
+                    "count": res.total, //解析数据长度
+                    "data": res.data //解析数据列表
+                };
+            }
+            //,toolbar: '#toolbarDemo'
+            , title: '数据表'
+            , cols: [[
+                {type: 'numbers', title: '序号'}
+                , {field: 'price', title: '出租价格'}
+                , {field: 'carnumber', title: '车牌照号'}
+                , {field: 'begindate', title: '开始时间'}
+                , {field: 'returndate', title: '结束时间'}
+                , {field: 'opername', title: '操作人'}
+                , {
+                    field: 'rentflag', title: '状态',
+                    templet: function (d) {
+                        return d.rentflag == 0 ? "未归还" : "已归还";
+                    }
+                }
+                , {
+                    field: 'acceptid', title: '操作', width: 150,
+                    templet: function (d) {
+                        if (d.rentflag == 0) {
+                            var html = '<a class="layui-btn  layui-btn-xs " lay-event="edit">修改</a>' +
+                                '<a class="layui-btn layui-btn-danger layui-btn-xs deleteBtn" lay-event="returnCar">归还</a>';
+                            return html;
+                        } else {
+                            return '<a class="layui-btn layui-btn-danger layui-btn-xs " lay-event="del">删除</a>';
+                        }
+                    }
+                }
+            ]]
+        });
+
+        var tableData = table.on('tool(test)', function (obj) {
+            var d = obj.data;
+            console.log(d)
+            if (obj.event == "returnCar") {
+                rentCar(d);
+            } else if (obj.event == "del") {
+                deleteCar(d.id);
+            } else if (obj.event == "edit") {
+                model("修改");
+                form.val("formFil", d);
+            }
+        });
+
+        //保存
+        form.on('submit(formDemo)', function (data) {
+            console.log(data)
+            var params = data.field;
+            if (CompareDate($("#begindate").val(), $("#returndate").val())) {
+                alert("开始时间不能晚于结束时间")
+                return false
+            }
+            $.post("../../rent/updateRent.action", params, function (msg) {
+                layer.msg("保存成功！");
+                table.reload("test");
+                layer.close(modelIndex)
+            });
+            return false;
+        });
+
+        function deleteCar(id) {
+            layer.confirm('确定要删除吗?', {icon: 3, title: '提示'}, function (index) {
+                $.post("../../rent/deleteRent.action", {id: id}, function (msg) {
+                    layer.msg("删除成功！");
+                    table.reload("test", {
+                        page: {
+                            curr: 1 //从当前页码开始
+                        }
+                    });
+                });
+            });
+        }
+
+        function model(title) {
+            modelIndex = layer.open({
+                type: 1,
+                title: title,
+                fixed: false,
+                resize: false,
+                shadeClose: true,
+                area: ['400px', '400px'],
+                content: $('#addData'),
+
+                end: function () {
+
+                }, success: function () {
+                }
+            });
+        }
+
+        function rentCar(d) {
+            var day = DateMinus(d.begindate, dateToString(new Date()), 2);
+            var money = parseInt(day) * d.price;
+            var p = {
+                checkid: new Date().getTime(),
+                rentid: d.rentid,
+                opername: custname,
+                problem: "无",
+                checkdesc: "无",
+                paymoney: 0,
+                checkdate: dateToString(new Date(), 1)
+            }
+            layer.confirm('你需支付的总费用为：' + money + '元', {icon: 3, title: '提示'}, function (index) {
+                $.post("../../check/saveCheck.action", p, function (msg) {
+                    layer.msg("支付成功！");
+                    table.reload("test");
+                });
+                layer.close(index);
+            });
+        }
+
+
+        function CompareDate(d1, d2) {
+            return ((new Date(d1.replace(/-/g, "\/"))) > (new Date(d2.replace(/-/g, "\/"))));
+
+        }
+
+        //获取当前系统时间转换
+        function dateToString(now, flag) {
+            var year = now.getFullYear();
+            var month = (now.getMonth() + 1).toString();
+            var day = (now.getDate()).toString();
+            var hour = (now.getHours()).toString();
+            var minute = (now.getMinutes()).toString();
+            var second = (now.getSeconds()).toString();
+            if (month.length == 1) {
+                month = "0" + month;
+            }
+            if (day.length == 1) {
+                day = "0" + day;
+            }
+            if (hour.length == 1) {
+                hour = "0" + hour;
+            }
+            if (minute.length == 1) {
+                minute = "0" + minute;
+            }
+            if (second.length == 1) {
+                second = "0" + second;
+            }
+            var dateTime = year + "-" + month + "-" + day;
+            if (flag == 1) {
+                dateTime = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+            }
+            return dateTime;
+
+        }
+
+        function DateMinus(date1, date2) {//date1:小日期   date2:大日期
+            var sdate = new Date(date1);
+            var now = new Date(date2);
+            var days = now.getTime() - sdate.getTime();
+            var day = Math.floor(days / (1000 * 60 * 60 * 24) * 100) / 100;
+            return day;
+        }
+
+        $(".headerBox").load("common/header.html");
+        setInterval(function () {
+            $(".myRent").addClass("layui-this");
+        }, 200);
+    });
+</script>
+</html>

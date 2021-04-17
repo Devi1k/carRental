@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeqifu.bus.mapper.FlowTableMapper">
+    <resultMap id="BaseResultMap" type="com.yeqifu.bus.domain.FlowTable">
+        <id column="id" jdbcType="Integer" property="id"/>
+        <result column="user_id" jdbcType="Integer" property="userId"/>
+        <result column="car_id" jdbcType="Integer" property="carId"/>
+        <result column="source_count" jdbcType="DOUBLE" property="sourceCount"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, car_id, source_count
+  </sql>
+
+    <insert id="insert" parameterType="com.yeqifu.bus.domain.FlowTable">
+    insert into t_flow_table (id, user_id, car_id,
+    source_count)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+    #{carId,jdbcType=INTEGER},
+    #{sourceCount,jdbcType=DOUBLE})
+  </insert>
+
+    <!-- 查询 -->
+    <select id="selecter" resultType="com.yeqifu.bus.domain.FlowTable" parameterType="com.yeqifu.bus.domain.FlowTable">
+        select
+        id id, user_id userId, car_id carId, source_count sourceCount
+        from t_flow_table
+        <where>
+            <if test="userId!=null and userId!=''">
+                and user_id=#{userId}
+            </if>
+            <if test="carId!=null and carId!=''">
+                and car_id=#{carId}
+            </if>
+        </where>
+        order by source_count desc
+    </select>
+
+    <update id="updateHobbyCount"
+            parameterType="com.yeqifu.bus.domain.FlowTable">
+        update t_flow_table
+        set source_count = #{sourceCount,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=Integer}
+    </update>
+</mapper>

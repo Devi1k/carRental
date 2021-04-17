@@ -19,6 +19,24 @@
         color: #666;
     }
 
+    .aList .layui-col-md3 img {
+        width: 220px;
+        height: 135px;
+    }
+
+    .price {
+        color: red !important;
+        margin-top: -26px;
+    }
+
+    .aList .layui-col-md3 p {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 30px;
+        color: #2196F3;
+    }
+
     .fl {
         float: left;
     }
@@ -165,7 +183,12 @@
                 </form>
 
             </div>
+
         </div>
+        <div class="aList" style="margin-top:100px;">
+
+        </div>
+        <div id="pagebox" style="float: right;"></div>
         <br><br>
 
 
@@ -173,6 +196,92 @@
 </div>
 </body>
 <script>
+
+    function getQuery(name) {
+        var reg = new RegExp('(^|&)' + name + "=([^&]*)", "i");
+        var r = decodeURI(window.location.search.substr(1)).match(reg);
+        if (r != null) return r[2];
+        return null;
+    }
+    layui.use(['element', 'jquery', 'laypage', 'form', 'carousel'], function () {
+        var laypage = layui.laypage;
+
+        function getCar(page, type, sprice, eprice) {
+            $.getJSON("../../flowTable/getCars.action", {
+                page: page,
+                limit: 3,
+                cartype: type,
+                sprice: sprice,
+                eprice: eprice
+            }, function (data) {
+                laypage.render({
+                    elem: 'pagebox'
+                    , count: data.count
+                    , limit: 8
+                    , curr: location.hash.replace('#!fenye=', '') //获取起始页
+                    , hash: 'fenye' //自定义hash值
+                    , jump: function (obj, first) {
+                        console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                        //首次不执行
+                        if (!first) {
+                            getCar(obj.curr, null, null, null);
+                            return false;
+                        }
+                    }
+                });
+
+                $(".aList").empty()
+
+                var type = [];
+                $.each(data.data, function (i, d) {
+                    //if (d.isrenting === 0) {
+                    var html = '<div class="layui-col-xs3 layui-col-sm3 layui-col-md3"  real-id="' + d.id + '"   data-id="' + d.carnumber + '">' +
+                        '<img src="../../file/downloadShowFile.action?path=' + d.carimg + '">' +
+                        '<p >' +
+                        '<span>' + d.cartype + '</span>' +
+                        '<span class="price" style="margin-left:20px;">￥' + d.rentprice + '</span></p></div>'
+                    $(".aList").append(html);
+                    //}
+                })
+                $(".layui-col-md3").click(function () {
+
+                    var d = $(this).attr("data-id");
+                    var realid = $(this).attr("real-id");
+                    // alert(d)
+                    //do logger
+                    if (d) {
+
+                        $.post("../../flowTable/save.action", {currentCar: realid}, function (data) {
+                            localStorage.setItem("num", d);
+                            location.href = "detail.html?id=" + realid
+                            // console.log(JSON.stringify(data))
+
+                        })
+//                        $.ajax({
+//                            url: "/flowTable/save.action" ,
+//                            data: {currentCar:d},
+//                            type: "GET",
+//                            dataType: "json",
+//                            success: function (data) {
+//                                localStorage.setItem("num", d);
+//                                //  location.href = "detail.html"
+//                                console.log(JSON.stringify(data))
+//                            }
+//                        });
+                    }
+
+
+                })
+
+            })
+        }
+
+        getCar(1)
+    });
+
+
+    var currentId = getQuery("id");
+    // alert(currentId)
     layui.use(['element', 'jquery', 'layer', 'form'], function () {
         var eleent = layui.element;
         var $ = layui.jquery;
@@ -189,7 +298,7 @@
         //获取详情
         function getDetail() {
             var num = localStorage.getItem("num");
-            $.getJSON("../../car/loadAllCar.action", {carnumber: num, page: 1, limit: 1}, function (data) {
+            $.getJSON("../../car/loadAllCar.action", {id: currentId, page: 1, limit: 1}, function (data) {
                 console.log(data)
                 data = data.data[0]
                 $(".carnumber").html(data.carnumber);
