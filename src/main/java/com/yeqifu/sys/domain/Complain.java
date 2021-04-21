@@ -17,7 +17,7 @@ public class Complain {
     private String opername;
     private String reply;
     private String replyer;
-    private String identity;
+    private String userId;
 
     public Integer getId() {
         return id;
@@ -43,15 +43,15 @@ public class Complain {
 		this.replyer = replyer;
 	}
 
-	public String getIdentity() {
-		return identity;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public void setIdentity(String identity) {
-		this.identity = identity;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public String getTitle() {
+    public String getTitle() {
         return title;
     }
 

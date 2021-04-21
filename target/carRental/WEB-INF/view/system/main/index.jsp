@@ -128,7 +128,7 @@
     </div>
     <!-- 底部 -->
     <div class="layui-footer footer">
-        <p><span>copyright @2019 </span></p>
+        <p><span>copyright @2021 </span></p>
     </div>
 </div>
 

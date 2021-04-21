@@ -7,9 +7,11 @@
         <result column="content" jdbcType="VARCHAR" property="content" />
         <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
         <result column="opername" jdbcType="VARCHAR" property="opername" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, content, createtime, opername, reply, replyer, identity
+        id, title, content, createtime, opername, reply, replyer, user_id
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -21,13 +23,13 @@
         delete from sys_complains
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.yeqifu.sys.domain.News">
+    <insert id="insert" parameterType="com.yeqifu.sys.domain.Complain">
         insert into sys_complains (id, title, content,
                               createtime, opername)
         values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
                 #{createtime,jdbcType=TIMESTAMP}, #{opername,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.yeqifu.sys.domain.News">
+    <insert id="insertSelective" parameterType="com.yeqifu.sys.domain.Complain">
         insert into sys_complains
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -51,8 +53,8 @@
             <if test="replyer != null">
                 replyer,
             </if>
-            <if test="identity != null">
-                identity,
+            <if test="user_id != null">
+                user_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -77,12 +79,12 @@
             <if test="replyer != null">
                 #{replyer},
             </if>
-            <if test="identity != null">
-                #{identity},
+            <if test="user_id != null">
+                #{user_id},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.yeqifu.sys.domain.News">
+    <update id="updateByPrimaryKeySelective" parameterType="com.yeqifu.sys.domain.Complain">
         update sys_complains
         <set>
             <if test="title != null">
@@ -103,13 +105,13 @@
             <if test="replyer != null">
                 replyer = #{replyer},
             </if>
-            <if test="identity != null">
-                identity = #{identity},
+            <if test="user_id != null">
+                user_id = #{user_id},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.yeqifu.sys.domain.News">
+    <update id="updateByPrimaryKey" parameterType="com.yeqifu.sys.domain.Complain">
         update sys_complains
         set title = #{title,jdbcType=VARCHAR},
             content = #{content,jdbcType=VARCHAR},
@@ -117,7 +119,7 @@
             opername = #{opername,jdbcType=VARCHAR}
             reply = #{reply,jdbcType=VARCHAR}
             replyer = #{replyer,jdbcType=VARCHAR}
-            identity = #{identity,jdbcType=VARCHAR}
+            user_id = #{user_id,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -139,8 +141,8 @@
             <if test="endTime!=null">
                 and endtime <![CDATA[<=]]>#{endTime}
             </if>
-             <if test="identity !=null">
-                and identity = #{identity}
+             <if test="user_id !=null">
+                and user_id = #{user_id}
             </if>
         </where>
         order by createtime asc

@@ -51,13 +51,11 @@
                        placeholder="请输入客户地址" style="height: 30px;border-radius: 10px">
             </div>
         </div>
-    </div>
-    <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">客户电话:</label>
             <div class="layui-input-inline" style="padding: 5px">
                 <input type="text" name="phone" autocomplete="off" class="layui-input layui-input-inline"
-                       placeholder="请输入客户电话" style="height: 30px;border-radius: 10px">
+                       placeholder="请输入电话" style="height: 30px;border-radius: 10px">
             </div>
         </div>
         <div class="layui-inline">
@@ -67,6 +65,8 @@
                        placeholder="请输入客户职业" style="height: 30px;border-radius: 10px">
             </div>
         </div>
+    </div>
+    <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">性别:</label>
             <div class="layui-input-inline">
