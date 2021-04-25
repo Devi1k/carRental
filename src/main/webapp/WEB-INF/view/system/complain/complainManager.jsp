@@ -38,9 +38,17 @@
                        placeholder="请输入投诉内容" style="height: 30px;border-radius: 10px">
             </div>
         </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">开始时间:</label>
+            <div class="layui-input-inline" style="padding: 5px">
+                <input type="text" name="startTime" id="startTime"
+                       class="layui-input layui-input-inline"
+                       placeholder="请输入出租开始时间" style="height: 30px;border-radius: 10px">
+            </div>
+        </div>
  
         <!-- <div class="layui-inline">
-            <label class="layui-form-label">操作人:</label>
+            <label class="layui-form-label">发布人:</label>
             <div class="layui-input-inline" style="padding: 5px">
                 <input type="text" name="opername" id="opername" class="layui-input layui-input-inline"
                        style="height: 30px;border-radius: 10px">
@@ -94,6 +102,7 @@
             <div class="layui-input-block">
                 <textarea class="layui-textarea " name="reply" lay-verify="content" id="reply"></textarea>
             </div>
+
         </div>
 
         <div class="layui-form-item">
@@ -139,10 +148,7 @@
             elem: '#startTime',
             type: 'datetime'
         });
-        laydate.render({
-            elem: '#endTime',
-            type: 'datetime'
-        });
+
 
         //初始化富文本编译器
         var editIndex;

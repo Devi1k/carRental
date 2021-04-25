@@ -1,5 +1,6 @@
 package com.yeqifu.sys.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yeqifu.sys.domain.Complain;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,10 +13,10 @@ public class ComplainVo extends Complain {
     /**
      * 将前台页面的时间转换到后端
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date startTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endTime;
+
 
     /**
      * 接受多个id
@@ -46,13 +47,7 @@ public class ComplainVo extends Complain {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
-        return endTime;
-    }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
 
     public Integer[] getIds() {
         return ids;

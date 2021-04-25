@@ -53,7 +53,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">开始时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" name="startTime" id="startTime" readonly="readonly"
+                <input type="date" name="startTime" id="startTime"
                        class="layui-input layui-input-inline"
                        placeholder="请输入出租开始时间" style="height: 30px;border-radius: 10px">
             </div>
@@ -61,7 +61,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">结束时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="text" name="endTime" id="endTime" readonly="readonly"
+                <input type="date" name="endTime" id="endTime"
                        class="layui-input layui-input-inline"
                        placeholder="请输入出租结束时间" style="height: 30px;border-radius: 10px">
             </div>
@@ -114,13 +114,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label">起租时间:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="begindate" id="begindate" readonly="readonly" lay-verify="required" placeholder="请输入起租时间" class="layui-input">
+                    <input type="date" name="begindate" id="begindate"  lay-verify="required" placeholder="请输入起租时间" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">还车时间:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="returndate" id="returndate" readonly="readonly" lay-verify="required" placeholder="请输入还车时间" class="layui-input">
+                    <input type="date" name="returndate" id="returndate"  lay-verify="required" placeholder="请输入还车时间" class="layui-input">
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">操作员:</label>
+                <label class="layui-form-label">租户:</label>
                 <div class="layui-input-inline">
                     <input type="text" name="opername" id="opername" lay-verify="required" placeholder="请输入操作员" readonly="readonly" class="layui-input">
                 </div>
@@ -225,11 +225,12 @@
                 }
                 , {field: 'begindate', title: '起租时间', align: 'center', width: '170'}
                 , {field: 'returndate', title: '还车时间', align: 'center', width: '170'}
-                , {field: 'opername', title: '操作员', align: 'center', width: '120'}
+                , {field: 'opername', title: '租户', align: 'center', width: '120'}
                 , {field: 'createtime', title: '录入时间', align: 'center', width: '180'}
                 , {fixed: 'right', title: '操作', toolbar: '#rentBar', align: 'center', width: '200'}
             ]],
             done: function (data, curr, count) {
+                console.log(data);
                 //不是第一页时，如果当前返回的数据为0那么就返回上一页
                 if (data.data.length == 0 && curr != 1) {
                     tableIns.reload({
@@ -244,6 +245,7 @@
         //模糊查询
         $("#doSearch").click(function () {
             var params = $("#searchFrm").serialize();
+            console.log(params)
             tableIns.reload({
                 url: "${yeqifu}/rent/loadAllRent.action?" + params,
                 page: {curr: 1}
@@ -276,6 +278,7 @@
 
         //打开修改页面
         function openUpdateRent(data) {
+            console.log(data);
             mainIndex = layer.open({
                 type: 1,
                 title: '修改出租单',

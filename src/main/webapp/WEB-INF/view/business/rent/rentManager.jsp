@@ -50,7 +50,22 @@
         </div>
     </div>
     <div class="layui-form-item">
-
+        <div class="layui-inline">
+            <label class="layui-form-label">开始时间:</label>
+            <div class="layui-input-inline" style="padding: 5px">
+                <input type="date" name="startTime" id="startTime"
+                       class="layui-input layui-input-inline"
+                       placeholder="请输入出租开始时间" style="height: 30px;border-radius: 10px">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">结束时间:</label>
+            <div class="layui-input-inline" style="padding: 5px">
+                <input type="date" name="endTime" id="endTime"
+                       class="layui-input layui-input-inline"
+                       placeholder="请输入出租结束时间" style="height: 30px;border-radius: 10px">
+            </div>
+        </div>
         <div class="layui-inline">
             <label class="layui-form-label">出租单状态:</label>
             <div class="layui-input-inline">
@@ -169,25 +184,25 @@
         var table = layui.table;
         var laydate = layui.laydate;
 
-        // //查询条件的
-        // laydate.render({
-        //     elem: '#startTime',
-        //     type: 'datetime'
-        // });
-        // laydate.render({
-        //     elem: '#endTime',
-        //     type: 'datetime'
-        // });
-        //
-        // //编辑修改弹出层的
-        // laydate.render({
-        //     elem:'#begindate',
-        //     type:'datetime'
-        // });
-        // laydate.render({
-        //     elem:'#returndate',
-        //     type:'datetime'
-        // });
+        //查询条件的
+        laydate.render({
+            elem: '#startTime',
+            type: 'datetime'
+        });
+        laydate.render({
+            elem: '#endTime',
+            type: 'datetime'
+        });
+
+        //编辑修改弹出层的
+        laydate.render({
+            elem:'#begindate',
+            type:'datetime'
+        });
+        laydate.render({
+            elem:'#returndate',
+            type:'datetime'
+        });
 
         //渲染数据表格
         tableIns = table.render({
@@ -230,6 +245,7 @@
         //模糊查询
         $("#doSearch").click(function () {
             var params = $("#searchFrm").serialize();
+            console.log(params)
             tableIns.reload({
                 url: "${yeqifu}/rent/loadAllRent.action?" + params,
                 page: {curr: 1}

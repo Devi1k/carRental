@@ -168,11 +168,11 @@
       <if test="identity!=null and identity!=''">
         and identity like concat("%",#{identity},"%")
       </if>
-      <if test="begindate!=null">
-        and createtime >=#{begindate}
+      <if test="startTime!=null">
+        and begindate =#{startTime}
       </if>
-      <if test="returndate!=null">
-        and createtime <![CDATA[<=]]>#{returndate}
+      <if test="endTime!=null">
+        and returndate =#{endTime}
       </if>
       <if test="rentflag!=null">
         and rentflag=#{rentflag}
