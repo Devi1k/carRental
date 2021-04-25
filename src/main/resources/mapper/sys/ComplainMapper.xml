@@ -7,7 +7,7 @@
         <result column="content" jdbcType="VARCHAR" property="content" />
         <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
         <result column="opername" jdbcType="VARCHAR" property="opername" />
-        <result column="userId" jdbcType="VARCHAR" property="userId" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
 
     </resultMap>
     <sql id="Base_Column_List">
@@ -54,7 +54,7 @@
                 replyer,
             </if>
             <if test="userId != null">
-                userId,
+                user_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">

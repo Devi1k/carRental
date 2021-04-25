@@ -27,10 +27,15 @@ public class RentServiceImpl implements IRentService {
 
     @Override
     public void addRent(RentVo rentVo) {
+        System.out.println("+++++++++++++++"+rentVo.getCarId());
         this.rentMapper.insertSelective(rentVo);
         //更改车辆的出租状态
         Car car = new Car();
         car.setCarnumber(rentVo.getCarnumber());
+        car.setId(rentVo.getCarId());
+        System.out.println("beginDate"+rentVo.getStartTime());
+        System.out.println("endDate"+rentVo.getEndTime());
+        System.out.println("identity"+rentVo.getIdentity());
         car.setIsrenting(SysConstast.RENT_CAR_TRUE);    //设置车辆为已出租状态
         carMapper.updateByPrimaryKeySelective(car);
     }

@@ -1,271 +1,276 @@
 <!DOCTYPE HTML>
 <html lang="zxx">
 <head>
-	<title>登录</title>
-	<!-- Meta tag Keywords -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="UTF-8" />
-	<meta name="keywords" content="" />
-	<style>
-		#canvas {
-		  vertical-align: middle;
-		  box-sizing: border-box;
-		  border: 1px solid #ddd;
-		  cursor: pointer;
-		  display: inline-block;
-		      background: #fff;
-		  }
-	</style>
-	<script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
+    <title>登录</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content=""/>
+    <style>
+        #canvas {
+            vertical-align: middle;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            display: inline-block;
+            background: #fff;
+        }
+    </style>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-	<link rel="stylesheet" href="css/fontawesome-all.css">
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/fontawesome-all.css">
 </head>
 
 <body>
-	<!-- bg effect -->
-	<div id="bg">
-		<canvas></canvas>
-		<canvas></canvas>
-		<canvas></canvas>
-	</div>
-	<h1 style="font-size:25px;">用户登录/注册</h1>
-	<div class="sub-main-w3">
-		<!-- 注册 -->
-		<form action="#" method="post" class="loginBox">
-			<h2>登录
-			</h2>
-			<div class="form-style-agile">
-				<label>
-					用户名
-				</label>
-				<input placeholder="请输入用户名" name="Name" class="account" type="text" value="lisi" required="">
-			</div>
-			<div class="form-style-agile">
-				<label>
-					密码
-				</label>
-				<input placeholder="请输入密码" name="Password" class="pwd" type="password" value="666666" required="">
-			</div>
-			<div class="form-style-agile">
-				<input placeholder="请输入验证码" name="text" class="input-val" type="text" 
-				 style=" width: 195px; display: inline-block;" required="">
-			  <canvas id="canvas" width="100" height="30"></canvas>
-			 </div>
-			<div class="wthree-text">
-				<ul>
-					<li>
-						<a href="javascript:void(0);" onclick="toRegister()" style="float: right;">去注册</a>
-					</li>
-				</ul>
-			</div>
-			<input type="button" class="loginBtn" value="登录">
-		</form>
-		<!-- 注册 -->
-		<form action="#" method="post" class="regBox" style="display: none;">
-			<h2 style="margin-bottom: 0px;">注册</h2>
-			<div class="form-style-agile" style="margin-bottom: 0px;">
-				<label>用户名</label>
-				<input placeholder="请输入用户名" name="Name" class="account1" type="text" required="">
-			</div>
-			<div class="form-style-agile" style="margin-bottom: 0px;">
-				<label>密码</label>
-				<input placeholder="请输入密码" name="Password" class="pwd1" type="password" required="">
-			</div>
-			<div class="form-style-agile" style="margin-bottom: 0px;">
-				<label>身份证号</label>
-				<input placeholder="请输入身份证号" name="identity" maxlength="18" class="identity" type="text" required="">
-			</div>
-			<div class="form-style-agile" style="margin-bottom: 0px;">
-				<label>电话</label>
-				<input placeholder="请输入电话" name="phone" class="phone" maxlength="11" type="text" required="">
-			</div>
-			<div class="form-style-agile" style="margin-bottom: 0px;">
-				<label>姓名</label>
-				<input placeholder="请输入姓名" name="name" class="name" type="text" required="">
-			</div>
-			<div class="form-style-agile" style="margin-bottom: 0px;">
-				<label>性别</label>
-				<input name="sex" type="radio" required="" value="1" checked>男
-				<input name="sex" type="radio" required="" value="0">女
-			</div>
-			<div class="wthree-text">
-				<ul>
-					<li>
-						<a href="javascript:void(0);" onclick="login()" style="float: right;">去登录</a>
-					</li>
-				</ul>
-			</div>
-			<input type="button" class="regBtn" value="注册">
-		</form>
-	</div>
-	<script src="../js/jquery.min.js"></script>
+<!-- bg effect -->
+<div id="bg">
+    <canvas></canvas>
+    <canvas></canvas>
+    <canvas></canvas>
+</div>
+<h1 style="font-size:25px;">用户登录/注册</h1>
+<div class="sub-main-w3">
+    <!-- 注册 -->
+    <form action="#" method="post" class="loginBox">
+        <h2>登录
+        </h2>
+        <div class="form-style-agile">
+            <label>
+                用户名
+            </label>
+            <input placeholder="请输入用户名" name="Name" class="account" type="text" value="lisi" required="">
+        </div>
+        <div class="form-style-agile">
+            <label>
+                密码
+            </label>
+            <input placeholder="请输入密码" name="Password" class="pwd" type="password" value="666666" required="">
+        </div>
+        <div class="form-style-agile">
+            <input placeholder="请输入验证码" name="text" class="input-val" type="text"
+                   style=" width: 195px; display: inline-block;" required="">
+            <canvas id="canvas" width="100" height="30"></canvas>
+        </div>
+        <div class="wthree-text">
+            <ul>
+                <li>
+                    <a href="javascript:void(0);" onclick="toRegister()" style="float: right;">去注册</a>
+                </li>
+            </ul>
+        </div>
+        <input type="button" class="loginBtn" value="登录">
+    </form>
+    <!-- 注册 -->
+    <form action="#" method="post" class="regBox" style="display: none;">
+        <h2 style="margin-bottom: 0px;">注册</h2>
+        <div class="form-style-agile" style="margin-bottom: 0px;">
+            <label>用户名</label>
+            <input placeholder="请输入用户名" name="Name" class="account1" type="text" required="">
+        </div>
+        <div class="form-style-agile" style="margin-bottom: 0px;">
+            <label>密码</label>
+            <input placeholder="请输入密码" name="Password" class="pwd1" type="password" required="">
+        </div>
+        <div class="form-style-agile" style="margin-bottom: 0px;">
+            <label>身份证号</label>
+            <input placeholder="请输入身份证号" name="identity" maxlength="18" class="identity" type="text" required="">
+        </div>
+        <div class="form-style-agile" style="margin-bottom: 0px;">
+            <label>电话</label>
+            <input placeholder="请输入电话" name="phone" class="phone" maxlength="11" type="text" required="">
+        </div>
+        <div class="form-style-agile" style="margin-bottom: 0px;">
+            <label>姓名</label>
+            <input placeholder="请输入姓名" name="name" class="name" type="text" required="">
+        </div>
+        <div class="form-style-agile" style="margin-bottom: 0px;">
+            <label>性别</label>
+            <input name="sex" type="radio" required="" value="1" checked>男
+            <input name="sex" type="radio" required="" value="0">女
+        </div>
+        <div class="wthree-text">
+            <ul>
+                <li>
+                    <a href="javascript:void(0);" onclick="login()" style="float: right;">去登录</a>
+                </li>
+            </ul>
+        </div>
+        <input type="button" class="regBtn" value="注册">
+    </form>
+</div>
+<script src="../js/jquery.min.js"></script>
 </body>
 <script>
-$("#canvas").on('click',function(){
-  draw(show_num);
- })
-//登录
-$(".loginBtn").click(function(){
-	var account = $(".account").val();
-	var pwd = $(".pwd").val();
-	var val = $(".input-val").val().toLowerCase();
-	 var num = show_num.join("");
-	if(account == "" || pwd == ""){
-		alert('账号和密码不能为空');
-		return false;
-	}
-	if(val == ""){
-		alert('请输入验证码');
-		return false;
-	}
-	if(val != num){
-		alert('验证码错误！');
-		return false;
-	}
-	
-	var params = {
-			account: account,
-			password: pwd,
-	}
-	 $.post("../../customer/login.action",params,function(data){
-		 console.log(data)
-		 if(data != ""){
-			 localStorage.setItem("uid",data.identity);
-			 localStorage.setItem("account",data.account);
-			 localStorage.setItem("custname",data.custname);
-			 location.href = "index.html"
-		 }else{
-			 alert("用户名或密码错误！")
-		 }
-		 
-	 })
-})
+    $("#canvas").on('click', function () {
+        draw(show_num);
+    })
+    //登录
+    $(".loginBtn").click(function () {
+        var account = $(".account").val();
+        var pwd = $(".pwd").val();
+        var val = $(".input-val").val().toLowerCase();
+        var num = show_num.join("");
+        if (account == "" || pwd == "") {
+            alert('账号和密码不能为空');
+            return false;
+        }
+        if (val == "") {
+            alert('请输入验证码');
+            return false;
+        }
+        if (val != num) {
+            alert('验证码错误！');
+            return false;
+        }
 
-//注册
-$(".regBtn").click(function(){
-	var account = $(".account1").val();
-	var pwd = $(".pwd1").val();
-	var name = $(".name").val();
-	var identity = $(".identity").val();
-	var phone = $(".phone").val();
-	var sex = $("input[name='sex']:checked").val();
-	
-	 var num = show_num.join("");
-	if(account == "" ){
-		alert('账号不能为空');
-		return false;
-	}
-	if( pwd == "" ){
-		alert('密码不能为空');
-		return false;
-	}
-	if(name == "" ){
-		alert('姓名不能为空');
-		return false;
-	}
-	if(phone == "" ){
-		alert('电话不能为空');
-		return false;
-	}
-	if(identity == "" ){
-		alert('身份证不能为空');
-		return false;
-	}
-	if(identity.length != 18 ){
-		alert('请输入18位的身份证');
-		return false;
-	}
-	if(account.length < 3 || account.length > 12){
-		alert('用户名3-12位字符');
-		return false;
-	}
-	if(pwd.length < 6){
-		alert('密码必须6位字符');
-		return false;
-	}
-	var params = {
-		account:account,
-		password:pwd,
-		custname: name,
-		sex: sex,
-		identity: identity,
-		phone: phone
-	}
-	 $.post("../../customer/addCustomer.action",params,function(data){
-		 alert("注册成功，去登录！")
-		 login();
-	 })
-})
-	function toRegister(){
-		$(".regBox").show();
-		$(".loginBox").hide();
-	}
-	function login(){
-		$(".regBox").hide();
-		$(".loginBox").show();
-	}
-	
-	
-	var show_num = [];
-	  draw(show_num);
-	//生成并渲染出验证码图形
-	 function draw(show_num) {
-	  var canvas_width=$('#canvas').width();
-	  var canvas_height=$('#canvas').height();
-	  var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
-	  var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
-	  canvas.width = canvas_width;
-	  canvas.height = canvas_height;
-	  var sCode = "a,b,c,d,e,f,g,h,i,j,k,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
-	  var aCode = sCode.split(",");
-	  var aLength = aCode.length;//获取到数组的长度
-	  for (var i = 0; i < 4; i++) { //这里的for循环可以控制验证码位数（如果想显示6位数，4改成6即可）
-	   var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
-	   // var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
-	   var deg = Math.random() - 0.5; //产生一个随机弧度
-	   var txt = aCode[j];//得到随机的一个内容
-	   show_num[i] = txt.toLowerCase();
-	   var x = 10 + i * 20;//文字在canvas上的x坐标
-	   var y = 20 + Math.random() * 8;//文字在canvas上的y坐标
-	   context.font = "bold 23px 微软雅黑";
-	   context.translate(x, y);
-	   context.rotate(deg);
-	   context.fillStyle = randomColor();
-	   context.fillText(txt, 0, 0);
-	   context.rotate(-deg);
-	   context.translate(-x, -y);
-	  }
-	  for (var i = 0; i <= 5; i++) { //验证码上显示线条
-	   context.strokeStyle = randomColor();
-	   context.beginPath();
-	   context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
-	   context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
-	   context.stroke();
-	  }
-	  for (var i = 0; i <= 30; i++) { //验证码上显示小点
-	   context.strokeStyle = randomColor();
-	   context.beginPath();
-	   var x = Math.random() * canvas_width;
-	   var y = Math.random() * canvas_height;
-	   context.moveTo(x, y);
-	   context.lineTo(x + 1, y + 1);
-	   context.stroke();
-	  }
-	 }
-	 //得到随机的颜色值
-	 function randomColor() {
-	  var r = Math.floor(Math.random() * 256);
-	  var g = Math.floor(Math.random() * 256);
-	  var b = Math.floor(Math.random() * 256);
-	  return "rgb(" + r + "," + g + "," + b + ")";
-	 }
+        var params = {
+            account: account,
+            password: pwd,
+        }
+        $.post("../../customer/login.action", params, function (data) {
+
+            if (data != "") {
+                // localStorage.setItem("uid", data.id);
+                localStorage.setItem("identity", data.identity);
+                localStorage.setItem("account", data.account);
+                localStorage.setItem("custname", data.custname);
+                location.href = "index.html"
+            } else {
+                alert("用户名或密码错误！")
+            }
+
+        })
+    })
+
+    //注册
+    $(".regBtn").click(function () {
+        var account = $(".account1").val();
+        var pwd = $(".pwd1").val();
+        var name = $(".name").val();
+        var identity = $(".identity").val();
+        var phone = $(".phone").val();
+        var sex = $("input[name='sex']:checked").val();
+
+        var num = show_num.join("");
+        if (account == "") {
+            alert('账号不能为空');
+            return false;
+        }
+        if (pwd == "") {
+            alert('密码不能为空');
+            return false;
+        }
+        if (name == "") {
+            alert('姓名不能为空');
+            return false;
+        }
+        if (phone == "") {
+            alert('电话不能为空');
+            return false;
+        }
+        if (identity == "") {
+            alert('身份证不能为空');
+            return false;
+        }
+        if (identity.length != 18) {
+            alert('请输入18位的身份证');
+            return false;
+        }
+        if (account.length < 3 || account.length > 12) {
+            alert('用户名3-12位字符');
+            return false;
+        }
+        if (pwd.length < 6) {
+            alert('密码必须6位字符');
+            return false;
+        }
+        var params = {
+            account: account,
+            password: pwd,
+            custname: name,
+            sex: sex,
+            identity: identity,
+            phone: phone
+        }
+        $.post("../../customer/addCustomer.action", params, function (data) {
+            alert("注册成功，去登录！")
+            login();
+        })
+    })
+
+    function toRegister() {
+        $(".regBox").show();
+        $(".loginBox").hide();
+    }
+
+    function login() {
+        $(".regBox").hide();
+        $(".loginBox").show();
+    }
+
+
+    var show_num = [];
+    draw(show_num);
+
+    //生成并渲染出验证码图形
+    function draw(show_num) {
+        var canvas_width = $('#canvas').width();
+        var canvas_height = $('#canvas').height();
+        var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
+        var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
+        canvas.width = canvas_width;
+        canvas.height = canvas_height;
+        var sCode = "a,b,c,d,e,f,g,h,i,j,k,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
+        var aCode = sCode.split(",");
+        var aLength = aCode.length;//获取到数组的长度
+        for (var i = 0; i < 4; i++) { //这里的for循环可以控制验证码位数（如果想显示6位数，4改成6即可）
+            var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
+            // var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+            var deg = Math.random() - 0.5; //产生一个随机弧度
+            var txt = aCode[j];//得到随机的一个内容
+            show_num[i] = txt.toLowerCase();
+            var x = 10 + i * 20;//文字在canvas上的x坐标
+            var y = 20 + Math.random() * 8;//文字在canvas上的y坐标
+            context.font = "bold 23px 微软雅黑";
+            context.translate(x, y);
+            context.rotate(deg);
+            context.fillStyle = randomColor();
+            context.fillText(txt, 0, 0);
+            context.rotate(-deg);
+            context.translate(-x, -y);
+        }
+        for (var i = 0; i <= 5; i++) { //验证码上显示线条
+            context.strokeStyle = randomColor();
+            context.beginPath();
+            context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
+            context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
+            context.stroke();
+        }
+        for (var i = 0; i <= 30; i++) { //验证码上显示小点
+            context.strokeStyle = randomColor();
+            context.beginPath();
+            var x = Math.random() * canvas_width;
+            var y = Math.random() * canvas_height;
+            context.moveTo(x, y);
+            context.lineTo(x + 1, y + 1);
+            context.stroke();
+        }
+    }
+
+    //得到随机的颜色值
+    function randomColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
 </script>
 </html>

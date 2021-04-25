@@ -141,7 +141,7 @@
                 </div>
                 <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
                     <h2 class="name"></h2>
-                    <input id="price" type="hidden"><input id="isrenting" type="hidden">
+                    <input id="price" type="hidden"><input id="isrenting" type="hidden"><input id="carId" type="hidden">
                     <span class="line2" style="margin-left:80px"><span class="tb">车牌号：</span></span><span
                         class="carnumber"></span></span><br><br>
                     <span class="line2" style="margin-left:80px"><span class="tb">车辆类型：</span><span
@@ -250,7 +250,8 @@
 
                     var d = $(this).attr("data-id");
                     var realid = $(this).attr("real-id");
-                    // alert(d)
+
+
                     //do logger
                     if (d) {
 
@@ -294,17 +295,20 @@
         setInterval(function () {
             $(".home").addClass("layui-this");
         }, 200);
-        var uid = localStorage.getItem("uid") || "";
+        var identity = localStorage.getItem("identity") || "";
         var custname = localStorage.getItem("custname") || "";
+        // var uid = localStorage.getItem("uid") || "";
         getDetail()
 
         //获取详情
         function getDetail() {
             var num = localStorage.getItem("num");
             $.getJSON("../../car/loadAllCar.action", {id: currentId, page: 1, limit: 1}, function (data) {
-                console.log(data)
                 data = data.data[0]
+                console.log(data)
                 $(".carnumber").html(data.carnumber);
+                $(".carId").html(data.id);
+                $("#carId").val(data.id);
                 $(".cartype").html(data.cartype);
                 $(".color").html(data.color);
                 $(".rentprice").html(data.rentprice + "元");
@@ -348,16 +352,18 @@
             var p = {
                 price: $("#price").val(),
                 rentflag: 1,
-                identity: uid,
+                identity: identity,
                 opername: $(".opername").html(),
                 opername: custname,
                 returndate: $("#returndate").val(),
                 begindate: $("#begindate").val(),
                 carnumber: $(".carnumber").html(),
+                carId: $("#carId").val(),
+                // userId: uid,
+
             }
+            console.log(p);
             $.post("../../rent/saveRent.action", p, function (data) {
-                console.log(CompareDate($("#begindate").val(), $("#returndate").val()))
-                console.log(data)
                 alert("预订成功！");
                 getDetail();
             })

@@ -29,6 +29,25 @@ public class Rent {
 
     private String opername;
 
+    private Integer userId;
+    private Integer carId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM+8") //后台数据库查询出来的时间转换到前台进行显示
     private Date createtime;
 

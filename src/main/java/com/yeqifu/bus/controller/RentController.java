@@ -58,6 +58,8 @@ public class RentController {
         //设置操作员
         User user =(User) WebUtils.getHttpSession().getAttribute("user");
         rentVo.setOpername(user.getRealname());
+        rentVo.setUserId(user.getUserid());
+        System.out.println(user.getUserid());
         return rentVo;
     }
 
@@ -69,6 +71,11 @@ public class RentController {
     @RequestMapping("saveRent")
     public ResultObj saveRent(RentVo rentVo){
         try {
+            Customer user = (Customer) WebUtils.getHttpSession().getAttribute("userGuestv2");
+
+            rentVo.setUserId(user.getId());
+            rentVo.setIdentity(user.getIdentity());
+
         	rentVo.setRentid(System.currentTimeMillis()+"");
             //设置创建时间
             rentVo.setCreatetime(new Date());

@@ -11,9 +11,12 @@
     <result column="carnumber" jdbcType="VARCHAR" property="carnumber" />
     <result column="opername" jdbcType="VARCHAR" property="opername" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="user_id" jdbcType="TIMESTAMP" property="userId" />
+    <result column="car_id" jdbcType="TIMESTAMP" property="carId" />
   </resultMap>
   <sql id="Base_Column_List">
-    rentid, price, begindate, returndate, rentflag, identity, carnumber, opername, createtime
+    user_id,car_id,rentid, price, begindate, returndate, rentflag, identity, carnumber, opername, createtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -26,11 +29,11 @@
     where rentid = #{rentid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.yeqifu.bus.domain.Rent">
-    insert into bus_rent (rentid, price, begindate, 
+    insert into bus_rent (user_id,car_id,rentid, price, begindate,
       returndate, rentflag, identity, 
       carnumber, opername, createtime
       )
-    values (#{rentid,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{begindate,jdbcType=TIMESTAMP}, 
+    values (#{userId,jdbcType=VARCHAR},#{carId,jdbcType=VARCHAR},#{rentid,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{begindate,jdbcType=TIMESTAMP},
       #{returndate,jdbcType=TIMESTAMP}, #{rentflag,jdbcType=INTEGER}, #{identity,jdbcType=VARCHAR}, 
       #{carnumber,jdbcType=VARCHAR}, #{opername,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
       )
@@ -38,6 +41,12 @@
   <insert id="insertSelective" parameterType="com.yeqifu.bus.domain.Rent">
     insert into bus_rent
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
       <if test="rentid != null">
         rentid,
       </if>
@@ -65,6 +74,12 @@
       createtime
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=VARCHAR},
+      </if>
       <if test="rentid != null">
         #{rentid,jdbcType=VARCHAR},
       </if>
@@ -139,6 +154,12 @@
     <include refid="Base_Column_List" />
     from bus_rent
     <where>
+      <if test="userId!=null and userId!=''">
+        and user_id like concat("%",#{userId},"%")
+      </if>
+      <if test="carId!=null and carId!=''">
+        and car_id like concat("%",#{carId},"%")
+      </if>
       <if test="rentid!=null and rentid!=''">
         and rentid like concat("%",#{rentid},"%")
       </if>
