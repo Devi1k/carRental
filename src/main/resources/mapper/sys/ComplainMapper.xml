@@ -7,7 +7,7 @@
         <result column="content" jdbcType="VARCHAR" property="content" />
         <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
         <result column="opername" jdbcType="VARCHAR" property="opername" />
-        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="userId" jdbcType="VARCHAR" property="userId" />
 
     </resultMap>
     <sql id="Base_Column_List">
@@ -53,8 +53,8 @@
             <if test="replyer != null">
                 replyer,
             </if>
-            <if test="user_id != null">
-                user_id,
+            <if test="userId != null">
+                userId,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -79,8 +79,8 @@
             <if test="replyer != null">
                 #{replyer},
             </if>
-            <if test="user_id != null">
-                #{user_id},
+            <if test="userId != null">
+                #{userId},
             </if>
         </trim>
     </insert>
@@ -105,8 +105,8 @@
             <if test="replyer != null">
                 replyer = #{replyer},
             </if>
-            <if test="user_id != null">
-                user_id = #{user_id},
+            <if test="userId != null">
+                user_id = #{userId},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -119,7 +119,7 @@
             opername = #{opername,jdbcType=VARCHAR}
             reply = #{reply,jdbcType=VARCHAR}
             replyer = #{replyer,jdbcType=VARCHAR}
-            user_id = #{user_id,jdbcType=VARCHAR}
+            user_id = #{userId,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 
@@ -141,8 +141,8 @@
             <if test="endTime!=null">
                 and endtime <![CDATA[<=]]>#{endTime}
             </if>
-             <if test="user_id !=null">
-                and user_id = #{user_id}
+             <if test="userId !=null">
+                and user_id = #{userId}
             </if>
         </where>
         order by createtime asc

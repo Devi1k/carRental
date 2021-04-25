@@ -64,8 +64,7 @@ public class FlowTableController {
                     var.setItemID(index, flowTable.getCarId());
                     Double sourceCount = flowTable.getSourceCount();
                     var.setValue(index, sourceCount == null ? new Float("0") :
-                            sourceCount
-                                    .floatValue());
+                            sourceCount.floatValue());
                     index++;
                 }
                 preferences.put(next.getKey(), var);
@@ -107,7 +106,10 @@ public class FlowTableController {
             if (user == null)
                 return getDefaultResult(user);// guest ignore
             List<FlowTable> selecter = carMapper.selecterFlow(new FlowTable());
-
+            for (FlowTable f:selecter
+                 ) {
+                System.out.println(f.getCarId()+f.getId()+f.getSourceCount());
+            }
             DataModel dataModel = createDataModel(selecter);
             //createMenrot
             ItemSimilarity item = new EuclideanDistanceSimilarity(dataModel);
