@@ -11,7 +11,6 @@
     <result column="carnumber" jdbcType="VARCHAR" property="carnumber" />
     <result column="opername" jdbcType="VARCHAR" property="opername" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="user_id" jdbcType="TIMESTAMP" property="userId" />
     <result column="car_id" jdbcType="TIMESTAMP" property="carId" />
   </resultMap>
@@ -169,11 +168,11 @@
       <if test="identity!=null and identity!=''">
         and identity like concat("%",#{identity},"%")
       </if>
-      <if test="startTime!=null">
-        and createtime >=#{startTime}
+      <if test="begindate!=null">
+        and createtime >=#{begindate}
       </if>
-      <if test="endTime!=null">
-        and createtime <![CDATA[<=]]>#{endTime}
+      <if test="returndate!=null">
+        and createtime <![CDATA[<=]]>#{returndate}
       </if>
       <if test="rentflag!=null">
         and rentflag=#{rentflag}

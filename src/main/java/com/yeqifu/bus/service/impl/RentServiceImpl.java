@@ -33,9 +33,9 @@ public class RentServiceImpl implements IRentService {
         Car car = new Car();
         car.setCarnumber(rentVo.getCarnumber());
         car.setId(rentVo.getCarId());
-        System.out.println("beginDate"+rentVo.getStartTime());
-        System.out.println("endDate"+rentVo.getEndTime());
-        System.out.println("identity"+rentVo.getIdentity());
+//        System.out.println("beginDate"+rentVo.getStartTime());
+//        System.out.println("endDate"+rentVo.getEndTime());
+//        System.out.println("identity"+rentVo.getIdentity());
         car.setIsrenting(SysConstast.RENT_CAR_TRUE);    //设置车辆为已出租状态
         carMapper.updateByPrimaryKeySelective(car);
     }
@@ -44,6 +44,10 @@ public class RentServiceImpl implements IRentService {
     public DataGridView queryAllRent(RentVo rentVo) {
         Page<Object> page = PageHelper.startPage(rentVo.getPage(),rentVo.getLimit());
         List<Rent> data = this.rentMapper.queryAllRent(rentVo);
+        for (Rent rent:data
+             ) {
+            System.out.println("time+++++++++++++++"+rent.getBegindate());
+        }
         return new DataGridView(page.getTotal(),data);
 
     }

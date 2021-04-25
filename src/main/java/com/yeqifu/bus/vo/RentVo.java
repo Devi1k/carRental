@@ -1,5 +1,6 @@
 package com.yeqifu.bus.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yeqifu.bus.domain.Rent;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,8 +18,10 @@ public class RentVo extends Rent {
      * 扩展表单参数  将前台时间提交到后台
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date startTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date endTime;
 
     public Date getStartTime() {

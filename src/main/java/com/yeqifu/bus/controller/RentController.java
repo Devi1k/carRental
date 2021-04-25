@@ -1,6 +1,7 @@
 package com.yeqifu.bus.controller;
 
 import com.yeqifu.bus.domain.Customer;
+import com.yeqifu.bus.domain.Rent;
 import com.yeqifu.bus.service.ICustomerService;
 import com.yeqifu.bus.service.IRentService;
 import com.yeqifu.bus.vo.RentVo;
@@ -130,6 +131,8 @@ public class RentController {
      */
     @RequestMapping("loadAllRent")
     public DataGridView loadAllRent(RentVo rentVo){
+        DataGridView res = this.rentService.queryAllRent(rentVo);
+        System.out.println("controller"+res.getData());
         return this.rentService.queryAllRent(rentVo);
     }
 
