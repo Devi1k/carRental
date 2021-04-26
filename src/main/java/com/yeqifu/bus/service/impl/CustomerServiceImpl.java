@@ -28,7 +28,10 @@ public class CustomerServiceImpl implements ICustomerService {
     public DataGridView queryAllCustomer(CustomerVo customerVo) {
         Page<Object> page = PageHelper.startPage(customerVo.getPage(), customerVo.getLimit());
         List<Customer> data = this.customerMapper.queryAllCustomer(customerVo);
-
+        for (Customer cust:data
+             ) {
+            System.out.println(cust.getAuthority());
+        }
         return new DataGridView(page.getTotal(), data);
     }
 
@@ -49,6 +52,7 @@ public class CustomerServiceImpl implements ICustomerService {
      */
     @Override
     public void updateCustomer(CustomerVo customerVo) {
+        System.out.println("authority"+customerVo.getAuthority());
         this.customerMapper.updateByPrimaryKeySelective(customerVo);
     }
 

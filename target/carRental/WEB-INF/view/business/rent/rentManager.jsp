@@ -53,7 +53,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">开始时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="date" name="startTime" id="startTime"
+                <input type="text" name="startTime" id="startTime"
                        class="layui-input layui-input-inline"
                        placeholder="请输入出租开始时间" style="height: 30px;border-radius: 10px">
             </div>
@@ -61,7 +61,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">结束时间:</label>
             <div class="layui-input-inline" style="padding: 5px">
-                <input type="date" name="endTime" id="endTime"
+                <input type="text" name="endTime" id="endTime"
                        class="layui-input layui-input-inline"
                        placeholder="请输入出租结束时间" style="height: 30px;border-radius: 10px">
             </div>

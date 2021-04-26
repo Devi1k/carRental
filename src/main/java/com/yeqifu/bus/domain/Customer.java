@@ -22,6 +22,15 @@ public class Customer {
     private String career;
     private String account;
     private String password;
+    private Integer authority;
+
+    public Integer getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Integer authority) {
+        this.authority = authority;
+    }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createtime;
