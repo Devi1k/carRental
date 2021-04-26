@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="${yeqifu}/static/layui_ext/dtree/dtree.css">
     <link rel="stylesheet" href="${yeqifu}/static/layui_ext/dtree/font/dtreefont.css">
     <style>
-    .layui-inline{display: block;;}
+        .layui-inline {
+            display: block;;
+        }
     </style>
 </head>
 <body class="childrenBody">
@@ -73,6 +75,7 @@
                 <input type="radio" name="sex" value="1" title="男">
                 <input type="radio" name="sex" value="0" title="女">
             </div>
+
             <button type="button"
                     class="layui-btn layui-btn-normal layui-icon layui-icon-search layui-btn-radius layui-btn-sm"
                     id="doSearch" style="margin-top: 4px">查询
@@ -136,8 +139,8 @@
                 </div>
             </div>
         </div>
-        
-         <div class="layui-form-item">
+
+        <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">客户地址:</label>
                 <div class="layui-input-inline">
@@ -151,7 +154,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">客户电话:</label>
@@ -165,6 +168,15 @@
                 <div class="layui-input-inline">
                     <input type="radio" name="sex" value="1" checked="checked" title="男">
                     <input type="radio" name="sex" value="0" title="女">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">客户权限:</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="authority" value="1" title="有权访问">
+                    <input type="radio" name="authority" value="0" title="无权访问">
                 </div>
             </div>
         </div>
@@ -217,12 +229,12 @@
                 , {field: 'createtime', title: '录入时间', align: 'center', width: '200'}
                 , {fixed: 'right', title: '操作', toolbar: '#customerBar', align: 'center', width: '150'}
             ]],
-            done:function (data, curr, count) {
+            done: function (data, curr, count) {
                 //不是第一页时，如果当前返回的数据为0那么就返回上一页
-                if(data.data.length==0&&curr!=1){
+                if (data.data.length == 0 && curr != 1) {
                     tableIns.reload({
-                        page:{
-                            curr:curr-1
+                        page: {
+                            curr: curr - 1
                         }
                     })
                 }
@@ -241,7 +253,7 @@
         //导出
         $("#doExport").click(function () {
             var params = $("#searchFrm").serialize();
-            window.location.href="${yeqifu}/stat/exportCustomer.action?"+params;
+            window.location.href = "${yeqifu}/stat/exportCustomer.action?" + params;
         });
 
         //监听头部工具栏事件
@@ -302,6 +314,7 @@
                 area: ['700px', '320px'],
                 success: function (index) {
                     form.val("dataFrm", data);
+
                     url = "${yeqifu}/customer/updateCustomer.action";
                 }
             });
@@ -311,6 +324,8 @@
         form.on("submit(doSubmit)", function (obj) {
             //序列化表单数据
             var params = $("#dataFrm").serialize();
+            console.log('edit');
+            console.log(params);
             $.post(url, params, function (obj) {
                 layer.msg(obj.msg);
                 //关闭弹出层

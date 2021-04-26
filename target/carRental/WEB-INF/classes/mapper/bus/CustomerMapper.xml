@@ -10,9 +10,10 @@
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="career" jdbcType="VARCHAR" property="career"/>
         <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="authority" jdbcType="INTEGER" property="authority"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id,identity, custname, sex, address, phone, career, createtime,account,password
+        id,identity, custname, sex, address, phone, career, createtime,account,password,authority
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -28,10 +29,10 @@
     <insert id="insert" parameterType="com.yeqifu.bus.domain.Customer">
         insert into bus_customer (identity, custname, sex,
                                   address, phone, career,
-                                  createtime)
+                                  createtime,authority)
         values (#{identity,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
                 #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR},
-                #{createtime,jdbcType=TIMESTAMP})
+                #{createtime,jdbcType=TIMESTAMP},#{authority,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.yeqifu.bus.domain.Customer">
         insert into bus_customer
@@ -63,6 +64,9 @@
             <if test="password != null">
                 password,
             </if>
+            <if test="authority != null">
+                authority,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="identity != null">
@@ -91,6 +95,9 @@
             </if>
             <if test="password != null">
                 #{password},
+            </if>
+            <if test="authority != null">
+                #{authority,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -121,6 +128,9 @@
             <if test="password != null">
                 password = #{password,jdbcType=VARCHAR},
             </if>
+            <if test="authority != null">
+                authority = #{authority,jdbcType=INTEGER},
+            </if>
         </set>
         where identity = #{identity,jdbcType=VARCHAR}
     </update>
@@ -131,7 +141,8 @@
             address    = #{address,jdbcType=VARCHAR},
             phone      = #{phone,jdbcType=VARCHAR},
             career     = #{career,jdbcType=VARCHAR},
-            createtime = #{createtime,jdbcType=TIMESTAMP}
+            createtime = #{createtime,jdbcType=TIMESTAMP},
+            authority        = #{authority,jdbcType=INTEGER},
         where identity = #{identity,jdbcType=VARCHAR}
     </update>
 
@@ -164,6 +175,9 @@
             </if>
             <if test="sex!=null">
                 and sex=#{sex}
+            </if>
+            <if test="authority!=null">
+                and authority=#{authority}
             </if>
         </where>
         order by createtime desc

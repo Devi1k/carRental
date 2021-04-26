@@ -25,40 +25,42 @@ public class CustomerController {
 
     /**
      * 加载客户列表返回DataGridView
+     *
      * @param customerVo
      * @return
      */
     @RequestMapping("loadAllCustomer")
-    public DataGridView loadAllCustomer(CustomerVo customerVo){
+    public DataGridView loadAllCustomer(CustomerVo customerVo) {
         return this.customerService.queryAllCustomer(customerVo);
     }
-    
+
     @RequestMapping("login")
     @ResponseBody
-    public Customer loadAllCustomer(Customer c){
-    	Customer customer = this.customerService.login(c);
-    	if(customer != null) {
+    public Customer loadAllCustomer(Customer c) {
+        Customer customer = this.customerService.login(c);
+        if (customer != null) {
             WebUtils.getHttpSession().setAttribute("userGuestv2", customer);
-    		return customer;
-    	}else {
-    		return null;
-    	}
-         
+            return customer;
+        } else {
+            return null;
+        }
+
     }
-    
+
 
     /**
      * 添加一个客户
+     *
      * @param customerVo
      * @return
      */
     @RequestMapping("addCustomer")
-    public ResultObj addCustomer(CustomerVo customerVo){
-        try{
+    public ResultObj addCustomer(CustomerVo customerVo) {
+        try {
             customerVo.setCreatetime(new Date());
             this.customerService.addCustomer(customerVo);
             return ResultObj.ADD_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.ADD_ERROR;
         }
@@ -66,15 +68,16 @@ public class CustomerController {
 
     /**
      * 修改一个客户
+     *
      * @param customerVo
      * @return
      */
     @RequestMapping("updateCustomer")
-    public ResultObj updateCustomer(CustomerVo customerVo){
-        try{
+    public ResultObj updateCustomer(CustomerVo customerVo) {
+        try {
             this.customerService.updateCustomer(customerVo);
             return ResultObj.UPDATE_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.UPDATE_ERROR;
         }
@@ -82,15 +85,16 @@ public class CustomerController {
 
     /**
      * 删除一个客户
+     *
      * @param customerVo
      * @return
      */
     @RequestMapping("deleteCustomer")
-    public ResultObj deleteCustomer(CustomerVo customerVo){
+    public ResultObj deleteCustomer(CustomerVo customerVo) {
         try {
             this.customerService.deleteCustomer(customerVo.getIdentity());
             return ResultObj.DELETE_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.DELETE_ERROR;
         }
@@ -98,15 +102,16 @@ public class CustomerController {
 
     /**
      * 批量删除客户
+     *
      * @param customerVo
      * @return
      */
     @RequestMapping("deleteBatchCustomer")
-    public ResultObj deleteBatchCustomer(CustomerVo customerVo){
-        try{
+    public ResultObj deleteBatchCustomer(CustomerVo customerVo) {
+        try {
             this.customerService.deleteBatchCustomer(customerVo.getIds());
             return ResultObj.DELETE_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.DELETE_ERROR;
         }

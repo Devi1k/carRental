@@ -136,14 +136,18 @@
             password: pwd,
         }
         $.post("../../customer/login.action", params, function (data) {
-
             if (data != "") {
+
+                if (data.authority===0){
+                    alert("该用户无权登录，请联系管理员");
+                    return false;
+                }
                 // localStorage.setItem("uid", data.id);
                 localStorage.setItem("identity", data.identity);
                 localStorage.setItem("account", data.account);
                 localStorage.setItem("custname", data.custname);
                 location.href = "index.html"
-            } else {
+            } else{
                 alert("用户名或密码错误！")
             }
 
