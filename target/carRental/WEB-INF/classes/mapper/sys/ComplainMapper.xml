@@ -136,10 +136,7 @@
                 and content like concat("%",#{content},"%")
             </if>
             <if test="startTime!=null">
-                and createtime >=#{startTime}
-            </if>
-            <if test="endTime!=null">
-                and endtime <![CDATA[<=]]>#{endTime}
+                and createtime =#{startTime}
             </if>
              <if test="userId !=null">
                 and user_id = #{userId}

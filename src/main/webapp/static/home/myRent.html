@@ -35,7 +35,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
-                    <input type="text" name="begindate" id="begindate" readonly disabled class="layui-input">
+                    <input type="text" name="begindate" id="begindate"  class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -64,6 +64,10 @@
 
         laydate.render({
             elem: '#returndate' //指定元素
+            , trigger: 'click'
+        });
+        laydate.render({
+            elem: '#begindate' //指定元素
             , trigger: 'click'
         });
 
@@ -135,12 +139,19 @@
 
         //保存
         form.on('submit(formDemo)', function (data) {
-            console.log(data)
             var params = data.field;
+            var s2 = dateToString(new Date(),4);
+            // console.log(s2);
+            // console.log('1111'+$("#begindate").val());
+            if (CompareDate(s2,$("#begindate").val() )) {
+                alert("开始时间不能晚于今天")
+                return false
+            }
             if (CompareDate($("#begindate").val(), $("#returndate").val())) {
                 alert("开始时间不能晚于结束时间")
                 return false
             }
+
             $.post("../../rent/updateRent.action", params, function (msg) {
                 layer.msg("保存成功！");
                 table.reload("test");
@@ -211,28 +222,14 @@
             var year = now.getFullYear();
             var month = (now.getMonth() + 1).toString();
             var day = (now.getDate()).toString();
-            var hour = (now.getHours()).toString();
-            var minute = (now.getMinutes()).toString();
-            var second = (now.getSeconds()).toString();
             if (month.length == 1) {
                 month = "0" + month;
             }
             if (day.length == 1) {
                 day = "0" + day;
             }
-            if (hour.length == 1) {
-                hour = "0" + hour;
-            }
-            if (minute.length == 1) {
-                minute = "0" + minute;
-            }
-            if (second.length == 1) {
-                second = "0" + second;
-            }
             var dateTime = year + "-" + month + "-" + day;
-            if (flag == 1) {
-                dateTime = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-            }
+
             return dateTime;
 
         }
