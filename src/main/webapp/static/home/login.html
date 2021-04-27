@@ -142,7 +142,7 @@
                     alert("该用户无权登录，请联系管理员");
                     return false;
                 }
-                // localStorage.setItem("uid", data.id);
+                localStorage.setItem("uid", data.id);
                 localStorage.setItem("identity", data.identity);
                 localStorage.setItem("account", data.account);
                 localStorage.setItem("custname", data.custname);

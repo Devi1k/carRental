@@ -1,164 +1,220 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>投诉建议</title>
-<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
-<link href="../frame/common.css" rel="stylesheet" type="text/css" />
-<link href="../css/gameInfoDetail.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../layui/layui.js"></script>
- 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>投诉建议</title>
+    <link href="../layui/css/layui.css" rel="stylesheet" type="text/css"/>
+    <link href="../frame/common.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/gameInfoDetail.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+
 </head>
+<style>
+    .view_reply{
+        margin-top: 100px;
+    }
+</style>
 <body>
 <div class="headerBox"></div>
 
-<div class="layui-container">  
-<a class="layui-btn" lay-event="add" id="openModel" style="margin:10px;">发布投诉建议</a>
-	<table class="layui-hide" id="test" lay-filter="test"></table>
-	<div id="addData" class="layer_self_wrap" style="display:none;">
+<div class="layui-container">
+    <a class="layui-btn" lay-event="add" id="openModel" style="margin:10px;">发布投诉建议</a>
+    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <div id="addData" class="layer_self_wrap" style="display:none;">
         <form id="dataForm" class="layui-form layui-form-pane" method="post" action="" style="padding: 15px;">
             <input id="id" type="hidden" name="id"/>
-			  <div class="layui-form-item">
-			    <label class="layui-form-label">标题</label>
-			    <div class="layui-input-block">
-			      	<input type="text" name="title" id="title" lay-verify="required" class="layui-input">
-			    </div>
-			  </div>
-			  <input type="hidden" id="opername" name="opername">
-			  <input type="hidden" id="identity" name="identity">
-			  <div class="layui-form-item">
-			    <label class="layui-form-label">内容描述</label>
-			    <div class="layui-input-block">
-			      	<textarea  name="content" id="content" lay-verify="required"  style="width:100%" rows='5'></textarea>
-			    </div>
-			  </div>
-			   <div class="layui-form-item">
-			    <div class="layui-input-block">
-			      <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
-			    </div>
-			  </div>
-   		</form>
-   </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" id="title" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+            <input type="hidden" id="opername" name="opername">
+            <input type="hidden" id="identity" name="identity">
+            <div class="layui-form-item">
+                <label class="layui-form-label">内容描述</label>
+                <div class="layui-input-block">
+                    <textarea name="content" id="content" lay-verify="required" style="width:100%" rows='5'></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+
+
+<div id="viewNewsDiv" style="padding: 10px;display: none">
+    <h2 id="view_title" align="center"></h2>
+    <hr>
+    <div style="text-align: right">
+        发布人:<span id="view_opername"></span>
+        <span style="display: inline-block;width: 20px"></span>
+        发布时间:<span id="view_createtime"></span>
+    </div>
+    <hr>
+    投诉内容：<div id="view_content"></div>
+    <div>
+        <div class="view_reply">
+            投诉回复：<div id="view_reply"></div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script type="text/javascript">
-layui.use(['element',"jquery","table","form"], function(){
-	var element = layui.element;
-	var table = layui.table;
-	var form = layui.form;
-	var $ = layui.jquery;
-	var modelIndex = "";
-	var flag = 1;
-	var uid = localStorage.getItem("uid") || "";
-	var custname = localStorage.getItem("custname") || "";
-	if(uid == ""){
-		location.href = "login.html";
-	}
-	$("#identity").val(uid);
-	$("#opername").val(custname);
-  var tableList = table.render({
-	  elem: '#test'
-	  ,url:"../../complain/loadAllComplains.action"
-	  ,where:{identity:uid}
-	  ,page:true
-	  ,parseData: function(res){ //res 即为原始返回的数据
-		return {
-		  "code": 0, //解析接口状态
-		  "msg": res.msg, //解析提示文本
-		  "count": res.count, //解析数据长度
-		  "data": res.data //解析数据列表
-		};
-	  }
-	  //,toolbar: '#toolbarDemo'
-	  ,title: '数据表'
-	  ,cols: [[
-		  {type: 'numbers', title:'序号'} 
-		  , {field: 'title', title: '标题', align: 'center'}
-	    , {field: 'content', title: '内容描述', align: 'center'}
-        , {field: 'createtime', title: '发布时间', align: 'center'}
-        , {field: 'reply', title: '回复内容', align: 'center'}
-        , {field: 'replyer', title: '回复人', align: 'center'}
-        ,{field:'acceptid', title:'操作',
-	    	templet: function(d){
-	    		return '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>'
-	         }
-	   	}
-	  ]]
-	});
+    layui.use(['element', "jquery", "table", "form"], function () {
+        var element = layui.element;
+        var table = layui.table;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var modelIndex = "";
+        var flag = 1;
+        var uid = localStorage.getItem("identity") || "";
+        var custname = localStorage.getItem("custname") || "";
+        console.log(uid);
+        if (uid == "") {
+            location.href = "login.html";
+        }
+        $("#identity").val(uid);
+        $("#opername").val(custname);
+        var tableList = table.render({
+            elem: '#test'
+            , url: "../../complain/loadAllComplains.action"
+            , where: {identity: uid}
+            , page: true
+            , parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": 0, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.data //解析数据列表
+                };
+            }
+            //,toolbar: '#toolbarDemo'
+            , title: '数据表'
+            , cols: [[
+                {type: 'numbers', title: '序号'}
+                , {field: 'title', title: '标题', align: 'center'}
+                , {field: 'content', title: '内容描述', align: 'center'}
+                , {field: 'createtime', title: '发布时间', align: 'center'}
+                , {field: 'reply', title: '回复内容', align: 'center'}
+                , {field: 'replyer', title: '回复人', align: 'center'}
+                , {
+                    field: 'acceptid', title: '操作',
+                    templet: function (d) {
+                        console.log(d);
+                        if (d.reply==''||d.reply==null){
+                            return '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>'
+                        }else{
+                            return '<a class="layui-btn  layui-btn-xs " lay-event="viewNews">查看</a>' +
+                                '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>'
+                        }
 
-	var tableData = table.on('tool(test)', function(obj){
-		  var d = obj.data;
-		  if(obj.event == "edit"){
+                    }
+                }
+            ]]
+        });
 
-		  }else if(obj.event == "del"){
-			  deleteData(d.id);
-		  }
-	});
-	//添加
-	$("#openModel").click(function(){
-		flag = 1;
-		$("#title").val("");
-		$("#content").val("");
-		$("#id").val("");
-	    form.render();
-		model("添加");
-	});
-	function model(title){
-		modelIndex = layer.open({
-		      type:1,
-		      title: title,
-		      fixed:false,
-		      resize :false,
-		      shadeClose: true,
-		      area: ['400px','400px'],
-		      content:$('#addData'),
-		      end:function(){
+        var tableData = table.on('tool(test)', function (obj) {
+            var d = obj.data;
+            if (obj.event == "viewNews") {
+                viewNews(d);
+            } else if (obj.event == "del") {
+                deleteData(d.id);
+            }
+        });
 
-		      },success:function(){
-		      }
-		  }); 
-	  }
-	//保存
-	form.on('submit(formDemo)', function(data){
-		console.log(data)
-		 var params = data.field;
-		 addOrEdit(params);
-	  	return false;
-	});
-	function addOrEdit(params){
-		var data = params;
-		var url = "";
-		if(flag == 1){
-			url = "../../complain/addComplains.action";
-		}else{
-			url = "../../complain/updateComplains.action";
-			data.id = params.id;
-		}
-		$.post(url,data,function(msg){
-		 	console.log(msg)
-		 	layer.msg("提交成功！");
-		 	table.reload("test", {});
-		 	layer.close(modelIndex);
-		 });
-	}
-	 function deleteData(id){
-		 layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
-			 $.post("../../complain/deleteComplains.action",{id:id},function(msg){
-				 layer.msg("删除成功！");
-			 	table.reload("test", {
-	    	        page: {
-	    	            curr: 1 //从当前页码开始
-	    	        }
-	            });
-			 });
-		 layer.close(index);
-		});	
-	 }
-	 $(".headerBox").load("common/header.html");
-	 setInterval(function(){
-		$(".jy").addClass("layui-this");
-	  },200);
-});
+        function viewNews(data) {
+            mainIndex = layer.open({
+                type: 1,
+                title: '查看投诉',
+                content: $("#viewNewsDiv"),
+                area: ['700px', '540px'],
+                success: function (index) {
+                    $("#view_title").html(data.title);
+                    $("#view_opername").html(data.opername);
+                    $("#view_createtime").html(data.createtime);
+                    $("#view_content").html(data.content);
+                    $("#view_reply").html(data.reply);
+
+                }
+            });
+        }
+
+        //添加
+        $("#openModel").click(function () {
+            flag = 1;
+            $("#title").val("");
+            $("#content").val("");
+            $("#id").val("");
+            form.render();
+            model("添加");
+        });
+
+        function model(title) {
+            modelIndex = layer.open({
+                type: 1,
+                title: title,
+                fixed: false,
+                resize: false,
+                shadeClose: true,
+                area: ['400px', '400px'],
+                content: $('#addData'),
+                end: function () {
+
+                }, success: function () {
+                }
+            });
+        }
+
+        //保存
+        form.on('submit(formDemo)', function (data) {
+            console.log(data)
+            var params = data.field;
+            addOrEdit(params);
+            return false;
+        });
+
+        function addOrEdit(params) {
+            var data = params;
+            var url = "";
+            if (flag == 1) {
+                url = "../../complain/addComplains.action";
+            } else {
+                url = "../../complain/updateComplains.action";
+                data.id = params.id;
+            }
+            $.post(url, data, function (msg) {
+                console.log(msg)
+                layer.msg("提交成功！");
+                table.reload("test", {});
+                layer.close(modelIndex);
+            });
+        }
+
+        function deleteData(id) {
+            layer.confirm('确定要删除吗?', {icon: 3, title: '提示'}, function (index) {
+                $.post("../../complain/deleteComplains.action", {id: id}, function (msg) {
+                    layer.msg("删除成功！");
+                    table.reload("test", {
+                        page: {
+                            curr: 1 //从当前页码开始
+                        }
+                    });
+                });
+                layer.close(index);
+            });
+        }
+
+        $(".headerBox").load("common/header.html");
+        setInterval(function () {
+            $(".jy").addClass("layui-this");
+        }, 200);
+    });
 </script>
 </html>

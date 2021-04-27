@@ -106,7 +106,7 @@
 			 })
 			return false;
 		});
-		var uid = localStorage.getItem("uid") || '';
+		var uid = localStorage.getItem("identity") || '';
 		if(uid != ""){
 			$.getJSON("../../customer/loadAllCustomer.action",{identity: uid,page:1,limit:2},function(data){
 		  		console.log(data)
